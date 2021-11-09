@@ -11,7 +11,7 @@ function App() {
       {/* <Route path="/" component={MenuBar} exact />
       <Route path="/setting" component={SettingContainer} />
       <Route path="/maker" component={MakerLoading} /> */}
-      <Route path="/MenuMaker.github.io" component={MenuBar} exact />
+      <Route path="/MenuMaker" component={MenuBar} exact />
       <Route path="/setting" component={SettingContainer} />
       <Route path="/maker" component={MakerLoading} />
       {/* <Route path="/register" component={DBmakerForm} /> */}
