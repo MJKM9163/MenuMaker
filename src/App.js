@@ -8,7 +8,10 @@ import SettingContainer from './containers/setting/SettingContainer';
 function App() {
   return (
     <>
-      <Route path="/" component={MenuBar} exact />
+      {/* <Route path="/" component={MenuBar} exact />
+      <Route path="/setting" component={SettingContainer} />
+      <Route path="/maker" component={MakerLoading} /> */}
+      <Route path="/https://mjkm9163.github.io/MenuMaker.github.io" component={MenuBar} exact />
       <Route path="/setting" component={SettingContainer} />
       <Route path="/maker" component={MakerLoading} />
       {/* <Route path="/register" component={DBmakerForm} /> */}
