@@ -14,8 +14,7 @@ const SettingContainer = ({ history }) => {
         const numberValue = e.target[0].value;
         e.preventDefault();
         dispatch(repeatSetting(numberValue))
-        // history.push('/');
-        history.push('/MenuMaker');
+        history.push('/');
     } 
 
     return (
