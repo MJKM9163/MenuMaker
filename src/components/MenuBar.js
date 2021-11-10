@@ -58,7 +58,7 @@ const MenuBar = () => {
             <div className="box">
                 <Links to="/maker">메뉴 만들기</Links>
                 <Links to="/setting">설정</Links>
-                {/* <Links to="/register">DB 임시 저장</Links> */}
+                <Links to="/register">DB 임시 저장</Links>
             </div>
             <div className="address">
                 기능 추가, 오류 제보<br />

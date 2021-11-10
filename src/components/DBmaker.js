@@ -86,7 +86,7 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                     onChange={onChange}
                     value={sauceValue}
                     />
-                {/* <button> form 전송</button> */}
+                <button> form 전송</button>
             </form>
         </DBmakerBlock>
     );
