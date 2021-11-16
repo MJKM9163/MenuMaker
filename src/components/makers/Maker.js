@@ -36,13 +36,13 @@ const ItemBlock = styled.div`
     }
 `
 
-const MaketItem = ({ rice, main, mainNumber, side, sideNumber }) => {
+const MaketItem = ({ rice, main, mainNumber, side, sideNumber, soup }) => {
     const mainItem = [0, 1];
     const sideItem = [0, 1, 2];
     return (
         <ItemBlock>
             <div className="riceBlock">
-                {rice.menuname}
+                <span>{rice.menuname}</span> / <span>{soup.menuname}</span>
             </div>
             {mainItem.map(item => (
                 <div key={item} className={`mainBlock_${item}`}>
@@ -58,7 +58,7 @@ const MaketItem = ({ rice, main, mainNumber, side, sideNumber }) => {
     )
 }
 
-const Maker = ({ time, rices, mains, mainNumber, sides, sideNumber }) => {
+const Maker = ({ time, rices, mains, mainNumber, sides, sideNumber, soups }) => {
     return (
         <MakerBlock>
             {time}
@@ -66,6 +66,7 @@ const Maker = ({ time, rices, mains, mainNumber, sides, sideNumber }) => {
                     rice={rices}
                     main={mains}
                     side={sides}
+                    soup={soups}
                     mainNumber={mainNumber}
                     sideNumber={sideNumber}
                 />

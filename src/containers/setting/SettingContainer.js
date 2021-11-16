@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Setting from '../../components/Setting'
 import{ repeatSetting } from '../../modules/setting';
 import { withRouter } from 'react-router-dom';
 
-const SettingContainerBlock = styled.div``;
+const SettingContainerBlock = styled.div`
+    height: 100vh;
+`;
 
 const SettingContainer = ({ history }) => {
     const dispatch = useDispatch()
 
-    const onSubmit = (e) => {
-        const numberValue = e.target[0].value;
-        e.preventDefault();
-        dispatch(repeatSetting(numberValue))
+    const [num, setNum] = useState('1');
+    const changeNum = (e) => {
+        setNum(e.target.value);
+    }
+
+    const numberUpdate = () => {
+        dispatch(repeatSetting(num))
         history.push('/');
     } 
 
     return (
         <SettingContainerBlock>
-            <Setting onSubmit={onSubmit} />
+            <Setting numberUpdate={numberUpdate} changeNum={changeNum}/>
         </SettingContainerBlock>
     );
 };

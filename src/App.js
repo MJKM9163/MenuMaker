@@ -8,9 +8,6 @@ import DBmakerForm from './containers/DBmakerForm';
 function App() {
   return (
     <>
-      {/* <Route path="/" component={MenuBar} exact />
-      <Route path="/setting" component={SettingContainer} />
-      <Route path="/maker" component={MakerLoading} /> */}
       <Route path="/" component={MenuBar} exact />
       <Route path="/setting" component={SettingContainer} />
       <Route path="/maker" component={MakerLoading} />

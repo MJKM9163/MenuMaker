@@ -21,7 +21,7 @@ const MenuListContainerBlock = styled.div`
 `;
 
 
-const MenuListContainer = ({ rices, mains, sides }) => {
+const MenuListContainer = ({ rices, mains, sides, soups }) => {
     const times = ["moning", "lunch", "diner"];
     const Repetition = [0, 1, 2];
     const mainNumber = [0, 2, 4];
@@ -38,6 +38,7 @@ const MenuListContainer = ({ rices, mains, sides }) => {
                     mainNumber={mainNumber[repeat]}
                     sides={sides}
                     sideNumber={sideNumber[repeat]}
+                    soups={soups[repeat]}
                 />
             ))}
         </MenuListContainerBlock>

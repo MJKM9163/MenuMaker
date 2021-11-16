@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
 
@@ -8,7 +9,7 @@ const SettingBlock = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: #fbffd4;
 
     .logo {
@@ -19,9 +20,8 @@ const SettingBlock = styled.div`
 const InputBlock = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
 
-    form Button {
+    button {
         width: 7rem;
         height: 3rem;
         font-size: 15px;
@@ -51,28 +51,28 @@ const Inputs = styled.div`
     }
 `
 
-const Setting = ({ onSubmit }) => {
+const Setting = ({ numberUpdate, changeNum }) => {
+
+    const { number } = useSelector(({ setting }) => ({
+        number: setting.number,
+    }))
 
     return (
         <SettingBlock>
             <div className="logo">설정 화면</div>
             <InputBlock>
-                <form onSubmit={onSubmit}>
-                    <Inputs>메뉴 생성 수
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                        </select>
-                    </Inputs>
-                    <Inputs>총 식사 인원<input /></Inputs>
-                    <Inputs>조리원 인원<input /></Inputs>
-                    <button>설정 확인</button>
-                </form>
+                <Inputs>메뉴 생성 수
+                    <select onChange={changeNum} defaultValue={number}>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                    </select>
+                </Inputs>
+                <button onClick={numberUpdate}>설정 확인</button>
             </InputBlock>
             <div className="address">
                 rhkrrbaudgg@naver.com

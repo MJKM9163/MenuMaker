@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MenuListContainer from './MenuListContainer';
-
+import{ repeatSetting } from '../../modules/setting';
+import Setting from '../../components/Setting';
 
 const MakerContainerBlock = styled.div`
     display: flex;
@@ -41,13 +42,21 @@ const ButtonsBlock = styled.div`
     }
 `
 
+const SlideSetting = styled.div`
+    position: fixed;
+    width: 650px;
+    height: 100%;
+`
 
-const MakerContainer = () => {
 
-    const { rices, mains, sides } = useSelector(({ maker }) => ({
+const MakerContainer = ({ changecheck }) => {
+    const dispatch = useDispatch()
+
+    const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
         rices: maker.rices,
         mains: maker.mains,
         sides: maker.sides,
+        soups: maker.soups,
     }));
     const { number } = useSelector(({ setting }) => ({
         number: setting.number,
@@ -57,28 +66,53 @@ const MakerContainer = () => {
 
     keys.splice(number, 8 - number)
 
-    console.log("랜더링 확인----------------------------")
+    const [SIn, setSIn] = useState(false);
+    const [num, setNum] = useState(number);
+    const changeNum = (e) => {
+        setNum(e.target.value);
+    }
+
+    const settingCtrl = () => {
+        setSIn(true);
+    }
+
+    const numberUpdate = () => {
+        changecheck();
+        dispatch(repeatSetting(num))
+        setSIn(false);
+    }
+
     return (
-        <MakerContainerBlock>
-            <div className="logo">
-                만들기 컨테이너 컴포넌트입니다.
-            </div>
-            <MenuListBlock>
-                {keys.map(key => (
-                    <MenuListContainer
-                        key={key}
-                        numberKey={numberKey[key]}
-                        rices={rices[key]}
-                        mains={mains[key]}
-                        sides={sides[key]} />
-                ))}
-            </MenuListBlock>
-            <ButtonsBlock>
-                <button>설정</button>
-                <button>재생성</button>
-                <button>프린트</button>
-            </ButtonsBlock>
-        </MakerContainerBlock>
+        <>
+            {SIn ? (
+                <SlideSetting>
+                    <Setting numberUpdate={numberUpdate} changeNum={changeNum} />
+                </SlideSetting>
+            ):(
+                null
+            )}
+            <MakerContainerBlock>
+                <div className="logo">
+                    만들기 컨테이너 컴포넌트입니다.
+                </div>
+                <MenuListBlock>
+                    {keys.map(key => (
+                        <MenuListContainer
+                            key={key}
+                            numberKey={numberKey[key]}
+                            rices={rices[key]}
+                            mains={mains[key]}
+                            sides={sides[key]}
+                            soups={soups[key]} />
+                    ))}
+                </MenuListBlock>
+                <ButtonsBlock>
+                    <button onClick={settingCtrl}>설정</button>
+                    <button>재생성</button>
+                    <button>프린트</button>
+                </ButtonsBlock>
+            </MakerContainerBlock>
+        </>
     );
 };
 

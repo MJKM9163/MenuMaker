@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MakerContainer from './MakerContainer';
-import { makerRice, makerMain, makerSide } from '../../modules/maker';
-import setting from '../../modules/setting';
+import { makerRice, makerMain, makerSide, makerSoup } from '../../modules/maker';
+//import setting from '../../modules/setting';
 
 const MakerWait = styled.div`
     display: flex;
@@ -37,29 +37,41 @@ const MakerWait = styled.div`
 `;
 
 const MakerLoading = () => {
+    const dispatch = useDispatch();
     const [check, setCheck] = useState(false);
 
     const number = useSelector(({setting}) => 
         setting.number,
     );
 
-    const dispatch = useDispatch();
+    const changecheck = () => { // useEffect와 반복되는 부분 수정하기
+        setCheck(false);        // 반복되는 부분 지우면 같은 숫자 설정시 오류 발생
+        dispatch(makerRice({number}))
+        dispatch(makerMain({number}))
+        dispatch(makerSide({number}))
+        dispatch(makerSoup({number}))
+        setTimeout(() => {
+            setCheck(true); 
+        }, 1000);
+    };
 
     useEffect(() => {
         dispatch(makerRice({number}))
         dispatch(makerMain({number}))
         dispatch(makerSide({number}))
+        dispatch(makerSoup({number}))
         setTimeout(() => {
             setCheck(true); 
-        }, 1000);
-    },[])
+        }, 1100);
+    },[number, dispatch])
+
 
     console.log('loading 랜더링 확인')
 
     return (
         <>
             {check ? (
-                <MakerContainer></MakerContainer>
+                <MakerContainer changecheck={changecheck}></MakerContainer>
             ) : (
                 <MakerWait>
                     <h1>메뉴를 만들고 있습니다!</h1>

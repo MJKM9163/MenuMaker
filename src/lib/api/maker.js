@@ -8,3 +8,6 @@ export const mainListCall = (number) =>
 
 export const sideListCall = (number) =>
     client.post('/api/menumaker/side', (number));
+
+export const soupListCall = (number) =>
+    client.post('/api/menumaker/soup', (number));
