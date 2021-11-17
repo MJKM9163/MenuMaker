@@ -25,7 +25,7 @@ const DBmakerBlock = styled.div`
 
 
 const DBmaker = ({ onSubmit, onChange, topInput,
-                menuValue, booleanValue, deValue, maValue, inValue, caValue, cookValue, sauceValue }) => {
+                menuValue, booleanValue, deValue, maValue, inValue, caValue, cookValue, sauceValue, countryValue }) => {
     return (
         <DBmakerBlock>
             <form onSubmit={onSubmit}>
@@ -40,7 +40,7 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                 <input
                     type="text"
                     name="main"
-                    placeholder="booleanType"
+                    placeholder="main_booleanType"
                     onChange={onChange}
                     value={booleanValue}
                     />
@@ -85,6 +85,13 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                     placeholder="sauce_base"
                     onChange={onChange}
                     value={sauceValue}
+                    />
+                <input
+                    type="text"
+                    name="country"
+                    placeholder="country"
+                    onChange={onChange}
+                    value={countryValue}
                     />
                 <button> form 전송</button>
             </form>

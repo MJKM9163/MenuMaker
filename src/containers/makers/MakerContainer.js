@@ -67,9 +67,20 @@ const MakerContainer = ({ changecheck }) => {
     keys.splice(number, 8 - number)
 
     const [SIn, setSIn] = useState(false);
+    const [SError, setSError] = useState(false);
+    const [able, setAble] = useState('disabled');
     const [num, setNum] = useState(number);
+
     const changeNum = (e) => {
-        setNum(e.target.value);
+        if (number !== e.target.value) {
+            setNum(e.target.value);
+            setSError(false);
+            setAble('');
+        } else if (number === e.target.value) {
+            setSError(true);
+            setAble('disabled');
+        }
+        console.log(e.target.value)
     }
 
     const settingCtrl = () => {
@@ -86,7 +97,7 @@ const MakerContainer = ({ changecheck }) => {
         <>
             {SIn ? (
                 <SlideSetting>
-                    <Setting numberUpdate={numberUpdate} changeNum={changeNum} />
+                    <Setting numberUpdate={numberUpdate} changeNum={changeNum} SError={SError} able={able}/>
                 </SlideSetting>
             ):(
                 null

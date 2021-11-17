@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
@@ -51,11 +51,17 @@ const Inputs = styled.div`
     }
 `
 
-const Setting = ({ numberUpdate, changeNum }) => {
+const ErrorBox = styled.div`
+    color: red;
+    text-align: center;
+`
+
+const Setting = ({ numberUpdate, changeNum, SError, able }) => {
 
     const { number } = useSelector(({ setting }) => ({
         number: setting.number,
     }))
+
 
     return (
         <SettingBlock>
@@ -72,7 +78,8 @@ const Setting = ({ numberUpdate, changeNum }) => {
                         <option>7</option>
                     </select>
                 </Inputs>
-                <button onClick={numberUpdate}>설정 확인</button>
+                {SError ? (<ErrorBox>메뉴 생성 수를 변경하세요!</ErrorBox>) : (null)}
+                <button onClick={numberUpdate} disabled={able}>설정 변경</button>
             </InputBlock>
             <div className="address">
                 rhkrrbaudgg@naver.com

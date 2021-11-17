@@ -39,6 +39,8 @@ const MakerWait = styled.div`
 const MakerLoading = () => {
     const dispatch = useDispatch();
     const [check, setCheck] = useState(false);
+    //const [test, setTest] = useState(true);
+
 
     const number = useSelector(({setting}) => 
         setting.number,
@@ -46,13 +48,15 @@ const MakerLoading = () => {
 
     const changecheck = () => { // useEffect와 반복되는 부분 수정하기
         setCheck(false);        // 반복되는 부분 지우면 같은 숫자 설정시 오류 발생
-        dispatch(makerRice({number}))
-        dispatch(makerMain({number}))
-        dispatch(makerSide({number}))
-        dispatch(makerSoup({number}))
-        setTimeout(() => {
-            setCheck(true); 
-        }, 1000);
+
+        // dispatch(makerRice({number}))
+        // dispatch(makerMain({number}))
+        // dispatch(makerSide({number}))
+        // dispatch(makerSoup({number}))
+        // setTimeout(() => {
+        //     setCheck(true); 
+        // }, 1000);
+
     };
 
     useEffect(() => {

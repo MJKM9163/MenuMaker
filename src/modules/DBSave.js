@@ -10,7 +10,7 @@ const CHANGE_FIELD = 'save/CHANGE_FIELD';
 
 export const dbSave = createAction(
     DB_SAVE, ({ menuname, main, description, main_ingredient, ingredient,
-                category, cook_type, sauce_base }) => ({
+                category, cook_type, sauce_base, country }) => ({
         menuname,
         main,
         description,
@@ -19,6 +19,7 @@ export const dbSave = createAction(
         category,
         cook_type,
         sauce_base,
+        country,
     })
 );
 
@@ -36,6 +37,7 @@ const initialState = {
     category: null,
     cook_type: null,
     sauce_base: null,
+    country: null,
 };
 
 const saveSaga = createRequestSaga(DB_SAVE, saveAPI.dbmenuSave);
@@ -55,7 +57,8 @@ const DBSave = handleActions (
             ingredient: null,
             category: null,
             cook_type: null,
-            sauce_base: null
+            sauce_base: null,
+            country: null
         }),
         [CHANGE_FIELD]: (state, { payload: { form, value } }) => ({
             ...state,

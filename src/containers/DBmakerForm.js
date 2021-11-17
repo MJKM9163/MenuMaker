@@ -15,6 +15,7 @@ const DBmakerForm = () => {
     const [caValue, setCaValue] = useState('');
     const [sauceValue, setSauceValue] = useState('');
     const [cookValue, setCookValue] = useState('');
+    const [countryValue, setCountryValue] = useState('');
     const topInput = useRef();
     const dispatch = useDispatch();
     const { menuname,
@@ -24,7 +25,8 @@ const DBmakerForm = () => {
             ingredient,
             category,
             cook_type,
-            sauce_base } = useSelector(({ DBSave }) => ({
+            sauce_base,
+            country } = useSelector(({ DBSave }) => ({
                 menuname: DBSave.menuname,
                 main: DBSave.main,
                 description: DBSave.description,
@@ -33,6 +35,7 @@ const DBmakerForm = () => {
                 category: DBSave.category,
                 cook_type: DBSave.cook_type,
                 sauce_base: DBSave.sauce_base,
+                country: DBSave.country,
             }))
 
     const onChange = useCallback(
@@ -54,6 +57,8 @@ const DBmakerForm = () => {
             setCookValue(value);
         } else if (name === "sauce_base") {
             setSauceValue(value);
+        } else if (name === "country") {
+            setCountryValue(value);
         }
         dispatch(change({
             form: name,
@@ -71,7 +76,8 @@ const DBmakerForm = () => {
                           ingredient,
                           category,
                           cook_type,
-                          sauce_base }));
+                          sauce_base,
+                          country }));
         setMenuValue('');
         setBooleanValue('');
         setDeValue('');
@@ -80,10 +86,11 @@ const DBmakerForm = () => {
         setCaValue('');
         setCookValue('');
         setSauceValue('');
+        setCountryValue('');
 
         topInput.current.focus();
     },[dispatch, topInput,
-        menuname, main, description, main_ingredient, ingredient, category, cook_type, sauce_base]);
+        menuname, main, description, main_ingredient, ingredient, category, cook_type, sauce_base, country]);
 
     return (
         <DBmakerFormBlock>
@@ -99,6 +106,7 @@ const DBmakerForm = () => {
                 caValue={caValue}
                 cookValue={cookValue}
                 sauceValue={sauceValue}
+                countryValue={countryValue}
                 >
             </DBmaker>
         </DBmakerFormBlock>
