@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 
+const BackDiv = styled.div`
+    width: 100%;
+    height: 100vh;
+    background: #E5B299;
+`
+
 const MenuBarBlock = styled.div`
     position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: whitesmoke;
+    background: #D4E2D4;
     width: 25rem;
     height: 100%;
-    border-right: 2px solid rgb(161, 161, 161);
+    border-right: 2px solid rgb(0, 0, 0);
 
     .logo {
         font-size: 22px;
@@ -21,7 +27,6 @@ const MenuBarBlock = styled.div`
     
     .box {
         width: 100%;
-        //margin-bottom: 380px;
     }
 
     .address {
@@ -36,12 +41,12 @@ const Links = styled(Link)`
     font-size: 35px;
     text-decoration: none;
     color: black;
-    background: #fffeea;
+    background: #FCF8E8;
     width: 100%;
     height: 7rem;
-    border-top: 1px solid rgb(161, 161, 161);
+    border-top: 1px solid rgb(0, 0, 0);
     & {
-        border-bottom: 1px solid rgb(161, 161, 161);
+        border-bottom: 1px solid rgb(0, 0, 0);
     }
     &:hover {
         background: #fffbb0;
@@ -51,20 +56,22 @@ const Links = styled(Link)`
 const MenuBar = () => {
 
     return (
-        <MenuBarBlock>
-            <div className="logo">
-                MenuMaker
-            </div>
-            <div className="box">
-                <Links to="/maker">메뉴 만들기</Links>
-                <Links to="/setting">설정</Links>
-                <Links to="/register">DB 임시 저장</Links>
-            </div>
-            <div className="address">
-                기능 추가, 오류 제보<br />
-                <b>rhkrrbaudgg@naver.com</b>
-            </div>
-        </MenuBarBlock>
+        <BackDiv>
+            <MenuBarBlock>
+                <div className="logo">
+                    MenuMaker
+                </div>
+                <div className="box">
+                    <Links to="/maker">메뉴 만들기</Links>
+                    <Links to="/setting">설정</Links>
+                    <Links to="/register">DB 임시 저장</Links>
+                </div>
+                <div className="address">
+                    기능 추가, 오류 제보<br />
+                    <b>rhkrrbaudgg@naver.com</b>
+                </div>
+            </MenuBarBlock>
+        </BackDiv>
     );
 };
 

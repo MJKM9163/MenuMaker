@@ -1,10 +1,7 @@
-import React, { useState, useRef, useCallback } from 'react';
-import styled from 'styled-components';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DBmaker from '../components/DBmaker';
 import { dbSave, change } from '../modules/DBSave';
-
-const DBmakerFormBlock = styled.div``;
 
 const DBmakerForm = () => {
     const [menuValue, setMenuValue] = useState('');
@@ -17,6 +14,8 @@ const DBmakerForm = () => {
     const [cookValue, setCookValue] = useState('');
     const [countryValue, setCountryValue] = useState('');
     const topInput = useRef();
+    const subInput = useRef(1);
+    const subButton = useRef(2);
     const dispatch = useDispatch();
     const { menuname,
             main,
@@ -36,7 +35,7 @@ const DBmakerForm = () => {
                 cook_type: DBSave.cook_type,
                 sauce_base: DBSave.sauce_base,
                 country: DBSave.country,
-            }))
+            }));
 
     const onChange = useCallback(
         e => {
@@ -60,20 +59,41 @@ const DBmakerForm = () => {
         } else if (name === "country") {
             setCountryValue(value);
         }
-        dispatch(change({
-            form: name,
-            value,
-        }));
+        if (name !== "ingredient") {
+            dispatch(change({
+                form: name,
+                value,
+            }));
+        } else if (name === "ingredient") {
+            dispatch(change({
+                form: name,
+                value,
+            }));
+        }
     },[dispatch]);
+
+    const ingredientArray = useMemo(() => [],[]);
+    const Arrayupdata = () => {
+        ingredientArray.push(ingredient)
+        setInValue('');
+        subInput.current.focus();
+    }
+
+    const fastClick = () => {
+        if (window.event.keyCode === 17) {
+            subButton.current.focus();
+        }
+    }
 
     const onSubmit = useCallback(
         e => {
         e.preventDefault();
+
         dispatch(dbSave({ menuname,
                           main,
                           description,
                           main_ingredient,
-                          ingredient,
+                          ingredientArray,
                           category,
                           cook_type,
                           sauce_base,
@@ -88,16 +108,21 @@ const DBmakerForm = () => {
         setSauceValue('');
         setCountryValue('');
 
+        ingredientArray.length = 0;
+
         topInput.current.focus();
     },[dispatch, topInput,
-        menuname, main, description, main_ingredient, ingredient, category, cook_type, sauce_base, country]);
+        menuname, main, description, main_ingredient, ingredientArray, category, cook_type, sauce_base, country]);
 
     return (
-        <DBmakerFormBlock>
+        <div>
             <DBmaker
                 onSubmit={onSubmit}
                 onChange={onChange}
                 topInput={topInput}
+                subInput={subInput}
+                subButton={subButton}
+                fastClick={fastClick}
                 menuValue={menuValue}
                 booleanValue={booleanValue}
                 deValue={deValue}
@@ -107,9 +132,11 @@ const DBmakerForm = () => {
                 cookValue={cookValue}
                 sauceValue={sauceValue}
                 countryValue={countryValue}
+                ingredientArray={ingredientArray}
+                Arrayupdata={Arrayupdata}
                 >
             </DBmaker>
-        </DBmakerFormBlock>
+        </div>
     );
 };
 

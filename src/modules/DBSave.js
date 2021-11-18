@@ -9,13 +9,13 @@ const DB_SAVE_FAILURE = 'save/DB_SAVE_FAILURE';
 const CHANGE_FIELD = 'save/CHANGE_FIELD';
 
 export const dbSave = createAction(
-    DB_SAVE, ({ menuname, main, description, main_ingredient, ingredient,
+    DB_SAVE, ({ menuname, main, description, main_ingredient, ingredientArray,
                 category, cook_type, sauce_base, country }) => ({
         menuname,
         main,
         description,
         main_ingredient,
-        ingredient,
+        ingredientArray,
         category,
         cook_type,
         sauce_base,
@@ -31,7 +31,7 @@ export const change = createAction(
 const initialState = {
     menuname: null,
     main: null,
-    description: "설명이 없습니다",
+    description: null,
     main_ingredient: null,
     ingredient: null,
     category: null,
@@ -52,7 +52,7 @@ const DBSave = handleActions (
             ...state,
             menuname: null,
             main: null,
-            description: "설명이 없습니다",
+            description: null,
             main_ingredient: null,
             ingredient: null,
             category: null,

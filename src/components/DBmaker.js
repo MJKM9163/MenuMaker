@@ -17,14 +17,20 @@ const DBmakerBlock = styled.div`
         }
     }
 
-    button {
+    .testButton {
         width: 100px;
-        height: 60px;
+        height: 30px;
     }
 `;
 
+const IngredientArrayBox = styled.div`
+    border: 1px solid;
+    width: 400px;
+    height: 50px;
+`
 
-const DBmaker = ({ onSubmit, onChange, topInput,
+
+const DBmaker = ({ onSubmit, onChange, topInput, Arrayupdata, ingredientArray, subInput, subButton, fastClick,
                 menuValue, booleanValue, deValue, maValue, inValue, caValue, cookValue, sauceValue, countryValue }) => {
     return (
         <DBmakerBlock>
@@ -44,13 +50,13 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                     onChange={onChange}
                     value={booleanValue}
                     />
-                {/* <input
+                <input
                     type="text"
                     name="description"
                     placeholder="description"
                     onChange={onChange}
                     value={deValue}
-                    /> */}
+                    />
                 <input
                     type="text"
                     name="main_ingredient"
@@ -63,6 +69,8 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                     name="ingredient"
                     placeholder="ingredient"
                     onChange={onChange}
+                    onKeyUp={fastClick}
+                    ref={subInput}
                     value={inValue}
                     />
                 <input
@@ -95,16 +103,22 @@ const DBmaker = ({ onSubmit, onChange, topInput,
                     />
                 <button> form 전송</button>
             </form>
+            <button
+                className="testButton"
+                ref={subButton}
+                onClick={Arrayupdata}>부재료 등록
+            </button>
+            <div style={{color: "orangered"}}>
+                부재료 등록으로 이동하는 키 <strong>Ctrl</strong> (ingredient 에서만 가능)
+            </div>
+            <div style={{marginTop: "13px"}}>
+                부재료 등록한 목록   
+                <IngredientArrayBox>
+                    {ingredientArray}
+                </IngredientArrayBox>
+            </div>
         </DBmakerBlock>
     );
 };
 
 export default DBmaker;
-
-// const MenuSchema = new Schema ({
-//     menuname: String,
-//     image: Buffer,
-//     description: String,
-//     main_ingredient: String,
-//     ingredient: [String],
-// });

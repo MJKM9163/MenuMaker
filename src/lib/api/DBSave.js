@@ -6,12 +6,12 @@ export const dbmenuSave = ({
     main,
     description,
     main_ingredient,
-    ingredient,
+    ingredientArray,
     category,
     cook_type,
     sauce_base,
     country }) => client.post('/api/menusave/register', {
-        menuname, main, description, main_ingredient, ingredient, category, cook_type, sauce_base, country })
+        menuname, main, description, main_ingredient, ingredientArray, category, cook_type, sauce_base, country })
                         
 
 // const MenuSchema = new Schema ({

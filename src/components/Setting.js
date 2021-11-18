@@ -56,6 +56,14 @@ const ErrorBox = styled.div`
     text-align: center;
 `
 
+const ExSelectBox = styled.div`
+    font-size: 30px;
+`
+
+const ExBox = styled.div`
+    margin: 15px 0px;
+`
+
 const Setting = ({ numberUpdate, changeNum, SError, able }) => {
 
     const { number } = useSelector(({ setting }) => ({
@@ -78,6 +86,20 @@ const Setting = ({ numberUpdate, changeNum, SError, able }) => {
                         <option>7</option>
                     </select>
                 </Inputs>
+                <ExSelectBox>
+                    주 재료 제외 선택
+                </ExSelectBox>
+                <ExBox>
+                    제외된 주 재료
+                    <div>마늘</div>
+                </ExBox>
+                <ExSelectBox>
+                    재료 제외 선택
+                </ExSelectBox>
+                <ExBox>
+                    제외된 재료
+                    <div>닭고기</div>
+                </ExBox>
                 {SError ? (<ErrorBox>메뉴 생성 수를 변경하세요!</ErrorBox>) : (null)}
                 <button onClick={numberUpdate} disabled={able}>설정 변경</button>
             </InputBlock>
