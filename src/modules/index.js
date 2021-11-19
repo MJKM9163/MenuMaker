@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import maker, { menuSaga } from './maker';
 import DBSave, { dbSaveSaga } from './DBSave';
-import setting from './setting';
+import setting, { menuList } from './setting';
 
 const rootReducer = combineReducers({
     maker,
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
-    yield all([dbSaveSaga(), menuSaga()]);
+    yield all([dbSaveSaga(), menuSaga(), menuList()]);
 };
 
 export default rootReducer;

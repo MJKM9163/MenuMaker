@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MenuListContainer from './MenuListContainer';
-import{ repeatSetting } from '../../modules/setting';
-import Setting from '../../components/Setting';
+import SettingContainer from '../setting/SettingContainer';
 
 const MakerContainerBlock = styled.div`
     display: flex;
@@ -50,7 +49,7 @@ const SlideSetting = styled.div`
 
 
 const MakerContainer = ({ changecheck }) => {
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
 
     const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
         rices: maker.rices,
@@ -67,37 +66,18 @@ const MakerContainer = ({ changecheck }) => {
     keys.splice(number, 8 - number)
 
     const [SIn, setSIn] = useState(false);
-    const [SError, setSError] = useState(false);
-    const [able, setAble] = useState('disabled');
-    const [num, setNum] = useState(number);
-
-    const changeNum = (e) => {
-        if (number !== e.target.value) {
-            setNum(e.target.value);
-            setSError(false);
-            setAble('');
-        } else if (number === e.target.value) {
-            setSError(true);
-            setAble('disabled');
-        }
-        console.log(e.target.value)
-    }
+    const [buttonChange, setButtonChange] = useState(false);
 
     const settingCtrl = () => {
         setSIn(true);
-    }
-
-    const numberUpdate = () => {
-        changecheck();
-        dispatch(repeatSetting(num))
-        setSIn(false);
+        setButtonChange(true);
     }
 
     return (
         <>
             {SIn ? (
                 <SlideSetting>
-                    <Setting numberUpdate={numberUpdate} changeNum={changeNum} SError={SError} able={able}/>
+                    <SettingContainer changecheck={changecheck} buttonChange={buttonChange}/>
                 </SlideSetting>
             ):(
                 null

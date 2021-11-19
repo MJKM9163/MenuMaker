@@ -39,24 +39,16 @@ const MakerWait = styled.div`
 const MakerLoading = () => {
     const dispatch = useDispatch();
     const [check, setCheck] = useState(false);
-    //const [test, setTest] = useState(true);
 
-
-    const number = useSelector(({setting}) => 
+    const number = useSelector(({ setting }) => 
         setting.number,
     );
+    const soups = useSelector(({ maker }) => 
+        maker.soups,
+    )
 
-    const changecheck = () => { // useEffect와 반복되는 부분 수정하기
-        setCheck(false);        // 반복되는 부분 지우면 같은 숫자 설정시 오류 발생
-
-        // dispatch(makerRice({number}))
-        // dispatch(makerMain({number}))
-        // dispatch(makerSide({number}))
-        // dispatch(makerSoup({number}))
-        // setTimeout(() => {
-        //     setCheck(true); 
-        // }, 1000);
-
+    const changecheck = () => {
+        setCheck(false);
     };
 
     useEffect(() => {
@@ -64,11 +56,15 @@ const MakerLoading = () => {
         dispatch(makerMain({number}))
         dispatch(makerSide({number}))
         dispatch(makerSoup({number}))
-        setTimeout(() => {
-            setCheck(true); 
-        }, 1100);
     },[number, dispatch])
 
+    useEffect(() => {
+        setTimeout(()=>{
+            if (soups) {
+                setCheck(true);
+            }
+        },500);
+    },[soups])
 
     console.log('loading 랜더링 확인')
 
