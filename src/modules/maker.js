@@ -11,24 +11,21 @@ const MENU_RICE_MAKER_SUCCESS = 'maker/MENU_RICE_MAKER_SUCCESS';
 const MENU_MAIN_MAKER_SUCCESS = 'maker/MENU_MAIN_MAKER_SUCCESS';
 const MENU_SIDE_MAKER_SUCCESS = 'maker/MENU_SIDE_MAKER_SUCCESS';
 const MENU_SOUP_MAKER_SUCCESS = 'maker/MENU_SOUP_MAKER_SUCCESS';
-// const MENU_RICE_MAKER_FAILURE = 'maker/MENU_RICE_MAKER_FAILURE';
-// const MENU_MAIN_MAKER_FAILURE = 'maker/MENU_MAIN_MAKER_FAILURE';
-// const MENU_SIDE_MAKER_FAILURE = 'maker/MENU_SIDE_MAKER_FAILURE';
-// const MENU_SOUP_MAKER_FAILURE = 'maker/MENU_SOUP_MAKER_FAILURE';
+
 const FAILURE = 'FAILURE';
 
 export const makerRice = createAction(
     MENU_RICE_MAKER, (number) => (number),
-)
+);
 export const makerMain = createAction(
     MENU_MAIN_MAKER, (number) => (number),
-)
+);
 export const makerSide = createAction(
     MENU_SIDE_MAKER, (number) => (number),
-)
+);
 export const makerSoup = createAction(
     MENU_SOUP_MAKER, (number) => (number),
-)
+);
 
 const initialState = {
     rices: null,

@@ -40,23 +40,29 @@ const MakerLoading = () => {
     const dispatch = useDispatch();
     const [check, setCheck] = useState(false);
 
-    const number = useSelector(({ setting }) => 
+    const number = useSelector(({ setting }) =>
         setting.number,
+    );
+    const outList = useSelector(({ setting }) => 
+        setting.outList,
+    );
+    const allOutList = useSelector(({ setting }) => 
+        setting.allOutList,
     );
     const soups = useSelector(({ maker }) => 
         maker.soups,
-    )
+    );
 
     const changecheck = () => {
         setCheck(false);
     };
 
     useEffect(() => {
-        dispatch(makerRice({number}))
-        dispatch(makerMain({number}))
-        dispatch(makerSide({number}))
-        dispatch(makerSoup({number}))
-    },[number, dispatch])
+        dispatch(makerRice({number, outList, allOutList}))
+        dispatch(makerMain({number, outList, allOutList}))
+        dispatch(makerSide({number, outList, allOutList}))
+        dispatch(makerSoup({number, outList, allOutList}))
+    },[number, dispatch, outList, allOutList])
 
     useEffect(() => {
         setTimeout(()=>{

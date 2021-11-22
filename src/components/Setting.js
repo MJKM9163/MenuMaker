@@ -20,6 +20,7 @@ const SettingBlock = styled.div`
 const InputBlock = styled.div`
     display: flex;
     flex-direction: column;
+    width: 450px;
 
     .final {
         width: 7rem;
@@ -122,11 +123,16 @@ const SearchDiv = styled.div`
         :hover {
             background: #bbbbbb;
         }
+        .mainOut {
+
+        }
     }
 `
 
-const Setting = ({ changeNum, SError, able, list, buttonChange,
-    numU_1, numU_2}) => {
+const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mainRemove, 
+    numU_1, numU_2, allMainList, allOutList}) => {
+
+    const topDivName = ["주 재료에서 제외할 재료를 선택하세요", "제외할 재료를 선택하세요"]
 
     const [on, setOn] = useState(false)
     const [nameCheck, setNameCheck] = useState(null);
@@ -142,13 +148,13 @@ const Setting = ({ changeNum, SError, able, list, buttonChange,
 
     const closeDiv = () => {
         setOn(false);
+        setNameCheck(null);
     };
+
 
     const { number } = useSelector(({ setting }) => ({
         number: setting.number,
     }));
-
-    const topDivName = ["주 재료에서 제외할 재료를 선택하세요", "제외할 재료를 선택하세요"]
 
     return (
         <SettingBlock>
@@ -160,9 +166,13 @@ const Setting = ({ changeNum, SError, able, list, buttonChange,
                     </div>
                     </TopDiv>
                     <SearchDiv>
-                        {list.map(item => (
-                            <span key={item._id}>{item._id} </span>
-                        ))}
+                        {nameCheck === 0 ? (mainList.map(item => (
+                            <span key={item._id} className={nameCheck} onClick={(e)=>mainRemove(item._id,e)}>{item._id} </span>
+                        )))
+                        :
+                        (allMainList.map(item => (
+                            <span key={item._id} className={nameCheck} onClick={(e)=>mainRemove(item._id,e)}>{item._id} </span>
+                        )))}
                     </SearchDiv>
                 </SelectDiv>) : (null)}
             <div className="logo">설정 화면</div>
@@ -183,22 +193,26 @@ const Setting = ({ changeNum, SError, able, list, buttonChange,
                     <button className="one" onClick={changeDiv}>선택하기</button>
                 </ExSelectBox>
                 <ExBox>
-                    제외된 주 재료
-                    <div>마늘</div>
+                    <div style={{color: "red"}}>제외된 주 재료</div>
+                    {outList.length !== 0 ? (outList.map(list => (
+                        <span key={list}>{list} </span>
+                    ))) : ("없음")}
                 </ExBox>
                 <ExSelectBox>
                     재료 제외 선택
                     <button className="two" onClick={changeDiv}>선택하기</button>
                 </ExSelectBox>
                 <ExBox>
-                    제외된 재료
-                    <div>닭고기</div>
+                    <div style={{color: "red"}}>제외된 재료</div>
+                    {allOutList.length !== 0 ? (allOutList.map(list => (
+                        <span key={list}>{list} </span>
+                    ))) : ("없음")}
                 </ExBox>
                 {SError ? (<ErrorBox>메뉴 생성 수를 변경하세요!</ErrorBox>) : (null)}
                 {buttonChange ?
-                (<button style={{color:'red'}} onClick={numU_1} disabled={able} className="final">설정 변경</button>)
+                (<button name="inSet" onClick={numU_1} disabled={able} className="final">설정 변경</button>)
                 :
-                (<button style={{color:'blue'}} onClick={numU_2} disabled={able} className="final">설정 변경</button>)}
+                (<button name="mainSet" onClick={numU_2} disabled={able} className="final">설정 변경</button>)}
 
             </InputBlock>
             <div className="address">
