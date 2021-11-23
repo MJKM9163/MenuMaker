@@ -77,7 +77,8 @@ const MakerContainer = ({ changecheck }) => {
         <>
             {SIn ? (
                 <SlideSetting>
-                    <SettingContainer changecheck={changecheck} buttonChange={buttonChange}/>
+                    <SettingContainer changecheck={changecheck} buttonChange={buttonChange}
+                        setButtonChange={setButtonChange} setSIn={setSIn}/>
                 </SlideSetting>
             ):(
                 null
@@ -99,8 +100,8 @@ const MakerContainer = ({ changecheck }) => {
                 </MenuListBlock>
                 <ButtonsBlock>
                     <button onClick={settingCtrl}>설정</button>
-                    <button>재생성</button>
-                    <button>프린트</button>
+                    <button onClick={()=>changecheck("refresh")}>재생성</button>
+                    <button>프린트<br />(미구현)</button>
                 </ButtonsBlock>
             </MakerContainerBlock>
         </>

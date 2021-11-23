@@ -16,7 +16,7 @@ sagaMiddleware.run(rootSaga);
 //basename="/MenuMaker"
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter basename="/MenuMaker">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,

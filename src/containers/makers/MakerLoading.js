@@ -53,8 +53,15 @@ const MakerLoading = () => {
         maker.soups,
     );
 
-    const changecheck = () => {
+    const changecheck = (check) => {
         setCheck(false);
+        console.log(check)
+        if (check === "refresh") {
+            dispatch(makerRice({number, outList, allOutList}))
+            dispatch(makerMain({number, outList, allOutList}))
+            dispatch(makerSide({number, outList, allOutList}))
+            dispatch(makerSoup({number, outList, allOutList}))
+        }
     };
 
     useEffect(() => {
@@ -68,11 +75,10 @@ const MakerLoading = () => {
         setTimeout(()=>{
             if (soups) {
                 setCheck(true);
+                console.log("loading 중")
             }
         },500);
     },[soups])
-
-    console.log('loading 랜더링 확인')
 
     return (
         <>

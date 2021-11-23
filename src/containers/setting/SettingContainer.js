@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Setting from '../../components/Setting'
@@ -43,7 +43,8 @@ const MakerWait = styled.div`
     }
 `;
 
-const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange }) => {
+const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange,
+        setButtonChange, setSIn }) => {
     const dispatch = useDispatch()
 
     const { number } = useSelector(({ setting }) => ({
@@ -82,7 +83,6 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
                 // console.log("null이라서 처음 한 번 채워줌");
             }
             setLoading(true);
-            console.log(allMainList)
         }
     },[dispatch, list, mainList, allMainList]);
     
@@ -95,7 +95,6 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
             setSError(true);
             setAble('disabled');
         }
-        console.log(e.target.value)
     }
 
     const mainRemove = useCallback((itemId, e) => {
@@ -109,19 +108,30 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
         
     },[mainList, outList, allMainList, allOutList]);
 
+    const backButton = () => {
+        if (buttonChange) {
+            setSIn(false);
+        } else if (!buttonChange) {
+            history.push('/');
+        }
+    }
+
 
     const numU_1 = () => {
         changecheck();
-        dispatch(repeatSetting(num))
-        dispatch(mainOut(outList))
-        dispatch(allOut(allOutList))
-        dispatch(mainKeep(mainList))
-        dispatch(mainKeep2(allMainList))
+        setButtonChange(false);
+        dispatch(repeatSetting(num));
+        dispatch(mainOut(outList));
+        dispatch(allOut(allOutList));
+        dispatch(mainKeep(mainList));
+        dispatch(mainKeep2(allMainList));
     }
     const numU_2 = () => {
-        dispatch(repeatSetting(num))
-        dispatch(mainOut(outList))
-        dispatch(allOut(allOutList))
+        dispatch(repeatSetting(num));
+        dispatch(mainOut(outList));
+        dispatch(allOut(allOutList));
+        dispatch(mainKeep(mainList));
+        dispatch(mainKeep2(allMainList));
         history.push('/');
     }
 
@@ -131,7 +141,7 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
             {loading ? (<Setting numU_1={numU_1} numU_2={numU_2} changeNum={changeNum} mainRemove={mainRemove}
                         mainList={mainList} allMainList={allMainList} outList={outList} allOutList={allOutList}
                         SError={SError} able={able} settingCtrlClose={settingCtrlClose}
-                        buttonChange={buttonChange}/>)
+                        buttonChange={buttonChange} backButton={backButton}/>)
             :
             (<MakerWait>
                 <h1>설정 화면을 가져오고 있습니다!</h1>

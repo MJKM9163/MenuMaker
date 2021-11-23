@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Address from './common/Address';
 
 const BackDiv = styled.div`
     width: 100%;
@@ -26,10 +27,6 @@ const MenuBarBlock = styled.div`
     
     .box {
         width: 100%;
-    }
-
-    .address {
-        text-align: center;
     }
 `
 
@@ -63,12 +60,10 @@ const MenuBar = () => {
                 <div className="box">
                     <Links to="/maker">메뉴 만들기</Links>
                     <Links to="/setting">설정</Links>
-                    <Links to="/register">DB 임시 저장</Links>
+                    <Links to="/coment">글 남기기</Links>
+                    <Links to="/register">메뉴 DB 저장</Links>
                 </div>
-                <div className="address">
-                    기능 추가, 오류 제보<br />
-                    <b>rhkrrbaudgg@naver.com</b>
-                </div>
+                <Address />
             </MenuBarBlock>
         </BackDiv>
     );

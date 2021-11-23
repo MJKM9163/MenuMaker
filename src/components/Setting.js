@@ -12,8 +12,17 @@ const SettingBlock = styled.div`
     height: 100%;
     background: #fbffd4;
 
-    .logo {
-        font-size: 25px;
+    header {
+        display: flex;
+        .logo {
+            font-size: 25px;
+        }
+        .back {
+            position: absolute;
+            right: 0px;
+            font-size: 25px;
+            cursor: pointer;
+        }
     }
 `
 
@@ -66,10 +75,6 @@ const ExSelectBox = styled.div`
         font-size: 15px;
         width: 128px;
         margin-left: 82px;
-    }
-
-    .two {
-        margin-left: 120px;
     }
 `
 
@@ -130,7 +135,7 @@ const SearchDiv = styled.div`
 `
 
 const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mainRemove, 
-    numU_1, numU_2, allMainList, allOutList}) => {
+    numU_1, numU_2, allMainList, allOutList, backButton}) => {
 
     const topDivName = ["주 재료에서 제외할 재료를 선택하세요", "제외할 재료를 선택하세요"]
 
@@ -175,7 +180,10 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                         )))}
                     </SearchDiv>
                 </SelectDiv>) : (null)}
-            <div className="logo">설정 화면</div>
+            <header>
+                <div className="logo">설정 화면</div>
+                <div className="back" onClick={backButton}>닫기</div>
+            </header>
             <InputBlock>
                 <Inputs>메뉴 생성 수
                     <select onChange={changeNum} defaultValue={number}>
@@ -199,7 +207,7 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                     ))) : ("없음")}
                 </ExBox>
                 <ExSelectBox>
-                    재료 제외 선택
+                    부 재료 제외 선택
                     <button className="two" onClick={changeDiv}>선택하기</button>
                 </ExSelectBox>
                 <ExBox>
