@@ -5,8 +5,7 @@ const ComentListBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
-    height: 650px;
+    width: 100%;
     background: #d4d4d4;
 `;
 
@@ -23,13 +22,21 @@ const ListBox = styled.div`
         margin: 0px 10px 0px 15px;
 
     }
+    .update {
+        flex: 0 0 40px;
+        margin-right: 5px;
+        cursor: pointer;
+        :hover {
+            background: #efff96;
+        }
+    }
     .delete {
         flex: 0 0 40px;
         width: 100px;
         text-align: center;
         cursor: pointer;
         :hover {
-            background: #ff7474;
+            background: #ff3232;
             color: white;
         }
     }
@@ -41,35 +48,38 @@ const DateBox = styled.div`
     width: 100%;
     height: 20px;
     text-align: right;
+
+    .username {
+        font-weight: bold;
+        font-size: 13px;
+    }
 `;
 
-const ComentList = ({ listDate }) => {
-    console.log(listDate);
+const ComentList = ({ listItem, updateClick }) => {
+    const idNum = listItem._id;
+
     return (
         <ComentListBlock>
             <DateBox>
                 <div className="username">
-                    냥냥고
+                    {listItem.username}
                 </div>
                 <div className="date">
-                    2021-11-23
+                    {new Date(listItem.publishedDate).toLocaleDateString()}
                 </div>
             </DateBox>
             <ListBox>
-                <div className="text">냥냥</div>
-                <div className="delete">삭제</div>
-            </ListBox>
-            <DateBox>
-                <div className="username">
-                    병아리
+                <div className="text">
+                    {listItem.body}
                 </div>
-                <div className="date">
-                    2021-11-23
+                <div>
+                    <span className="update" onClick={updateClick} id={idNum}>
+                        수정
+                    </span>
+                    <span className="delete">
+                        삭제
+                    </span>
                 </div>
-            </DateBox>
-            <ListBox>
-                <div className="text">삐약삐약</div>
-                <div className="delete">삭제</div>
             </ListBox>
         </ComentListBlock>
     );

@@ -7,11 +7,16 @@ const ComentBlock = styled.div`
     height: 100px;
     outline: 1px solid;
 
-    .username {
+    .username, .username_0 {
         position: absolute;
+        width: 180px;
         :focus {
             outline: none;
         };
+    };
+
+    .username_0 {
+        border: 1px solid red;
     };
 
     .body {
@@ -21,26 +26,62 @@ const ComentBlock = styled.div`
         };
     };
 
+    .bodyOn {
+        width: 500px;
+        border: 2px solid yellowgreen;
+        :focus {
+            outline: none;
+        };
+    }
+
     button {
         width: 100px;
     };
 `;
 
-const Coment = ({ addCreate, bodyUpDate }) => {
+const Coment = ({ addCreate, bodyUpDate, error, enterPress,
+    username, body, changeButton, changeInput }) => {
     
     return (
         <ComentBlock>
             <input
                 type="text"
                 className="username"
-                placeholder="사용자 이름 입력"
-                onChange={bodyUpDate} />
-            <input
-                type="text"
-                className="body"
-                placeholder="내용 입력.."
-                onChange={bodyUpDate} />
-            <button onClick={addCreate}>글 남기기</button>
+                placeholder="사용자 이름 입력(최대 8글자)"
+                onChange={bodyUpDate}
+                value={username}
+                disabled={changeInput} />
+            {changeInput ?
+                (<input
+                    type="text"
+                    className="body"
+                    placeholder="수정할 내용 입력..(최대 200글자)"
+                    onChange={bodyUpDate}
+                    onKeyPress={((e) => enterPress(e, "updateButton"))}
+                    value={body} />)
+                :
+                (<input
+                    type="text"
+                    className="body"
+                    placeholder="내용 입력..(최대 200글자)"
+                    onChange={bodyUpDate}
+                    onKeyPress={((e) => enterPress(e, "createButton"))}
+                    value={body} />)
+            }
+            {changeButton ?
+            (<button
+                onClick={(() => addCreate("updateButton"))}
+                disabled={error}
+                className="updateButton">
+                    수정하기
+            </button>)
+            :
+            (<button
+                onClick={(() => addCreate("createButton"))}
+                disabled={error}
+                className="createButton">
+                    글 남기기
+            </button>)}
         </ComentBlock>
     );
 };

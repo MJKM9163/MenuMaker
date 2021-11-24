@@ -5,4 +5,6 @@ export const create = (comentDate) =>
 
 export const comentList = () =>
     client.get('/api/coment/list');
-                        
+
+export const comentUpdate = (updateDate) =>
+    client.patch('/api/coment/update', (updateDate));
