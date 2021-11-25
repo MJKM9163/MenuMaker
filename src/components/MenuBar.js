@@ -24,6 +24,11 @@ const MenuBarBlock = styled.div`
         font-size: 22px;
         cursor: default;
     }
+
+    .auth {
+        width: 100%;
+        transform: translateY(20%);
+    }
     
     .box {
         width: 100%;
@@ -56,6 +61,9 @@ const MenuBar = () => {
             <MenuBarBlock>
                 <div className="logo">
                     MenuMaker
+                </div>
+                <div className="auth">
+                    <Links to="/login">로그인</Links>
                 </div>
                 <div className="box">
                     <Links to="/maker">메뉴 만들기</Links>

@@ -6,9 +6,11 @@ import * as comentAPI from '../lib/api/coment';
 const COMENT_CREATE = 'coment/CREATE';
 const COMENT_LIST = 'coment/LIST';
 const COMENT_UPDATE = 'coment/UPDATE';
+// const COMENT_DELETE = 'coment/DELETE';
 const COMENT_CREATE_SUCCESS = 'coment/CREATE_SUCCESS';
 const COMENT_LIST_SUCCESS = 'coment/LIST_SUCCESS';
 const COMENT_UPDATE_SUCCESS = 'coment/UPDATE_SUCCESS';
+// const COMENT_DELETE_SUCCESS = 'coment/DELETE_SUCCESS';
 const CHANGE = 'coment/CHANGE';
 const INITIALIZATION = 'coment/INITIALIZATION';
 const ERROR_NULL = 'coment/ERROR_NULL';
@@ -23,6 +25,9 @@ export const comentList = createAction(
 export const comentUpdate = createAction(
     COMENT_UPDATE, (updateDate) => (updateDate),
 );
+// export const comentDelete = createAction(
+//     COMENT_DELETE, (id) => (id),
+// );
 export const changeText = createAction(
     CHANGE, (text) => (text),
 );
@@ -44,10 +49,12 @@ const initialState = {
 const createSaga = createRequestSaga(COMENT_CREATE, comentAPI.create);
 const listSaga = createRequestSaga(COMENT_LIST, comentAPI.comentList);
 const updateSaga = createRequestSaga(COMENT_UPDATE, comentAPI.comentUpdate);
+// const deleteSaga = createRequestSaga(COMENT_DELETE, comentAPI.comentDelete);
 export function* comentSaga() {
     yield takeLatest(COMENT_CREATE, createSaga);
     yield takeLatest(COMENT_LIST, listSaga);
     yield takeLatest(COMENT_UPDATE, updateSaga);
+    // yield takeLatest(COMENT_DELETE, deleteSaga);
 };
 
 const coment = handleActions(
@@ -64,6 +71,11 @@ const coment = handleActions(
             ...state,
             create,
         }),
+        // [COMENT_DELETE_SUCCESS]: state => ({
+        //     ...state,
+        //     body: '',
+        //     username: '',
+        // }),
         [CHANGE]: (state, { payload: { form, value } }) => ({
             ...state,
             [form]: value,

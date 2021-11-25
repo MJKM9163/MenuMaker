@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ComentCreate from '../../components/coments/ComentCreate';
 import ComentListContainer from './ComentListContainer';
 import Address from '../../components/common/Address';
+import { comentDelete } from '../../lib/api/coment';
 import { comentCreate, comentList, changeText,
     initialization, comentUpdate, errorNull } from '../../modules/coment';
 
@@ -46,6 +47,8 @@ const ComentContainer = () => {
     const [changeButton, setChangeButton] = useState(false);
     const [changeInput, setChangeInput] = useState(false);
     const [idValue, setIdValue] = useState(null);
+    const [itemFocus, setItemFocus] = useState(false);
+    const [deleteBox, setDeleteBox] = useState(false);
 
     const body = useSelector(({ coment }) => 
         coment.body,
@@ -114,8 +117,30 @@ const ComentContainer = () => {
             setListRender(true);
             setChangeInput(false);
             setChangeButton(false);
+            setItemFocus(false);
         }
     };
+
+    const deleteClick = (e) => {
+        setIdValue(e.target.id);
+        setDeleteBox(true);
+    }
+
+    const deleteBoxCancel = () => {
+        setIdValue(null);
+        setDeleteBox(false);
+    }
+
+    const deleteStart = async () => {
+        try {
+            setDeleteBox(false);
+            await comentDelete(idValue);
+            setLoading(false);
+            setListRender(true);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const updateClick = (e) => {
         if (!changeButton) {
@@ -126,6 +151,7 @@ const ComentContainer = () => {
             }));
             setChangeInput(true);
             setChangeButton(true);
+            setItemFocus(e.target.id);
         } else if (changeButton) {
             setIdValue(null);
             dispatch(changeText({
@@ -134,6 +160,7 @@ const ComentContainer = () => {
             }));
             setChangeInput(false);
             setChangeButton(false);
+            setItemFocus(false);
         }
     }
 
@@ -156,7 +183,14 @@ const ComentContainer = () => {
                 <div className="close">뒤로</div>
             </TopMenu>
             {loading ?
-                (<ComentListContainer listDate={listDate} updateClick={updateClick}/>)
+                (<ComentListContainer
+                    listDate={listDate}
+                    updateClick={updateClick}
+                    deleteClick={deleteClick}
+                    deleteBox={deleteBox}
+                    deleteStart={deleteStart}
+                    deleteBoxCancel={deleteBoxCancel}
+                    itemFocus={itemFocus}/>)
                 :
                 (<LoadingBox>댓글 목록을 불러오는 중입니다..</LoadingBox>)}
             {error ?

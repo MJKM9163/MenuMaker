@@ -6,7 +6,11 @@ const ComentListBlock = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background: #d4d4d4;
+    background: ${props => props.check ? '#ff6528' : '#fbffea'};
+
+    :hover {
+        background: ${props => props.check ? '#ff6528' : '#f7ffd3'};
+    }
 `;
 
 const ListBox = styled.div`
@@ -16,6 +20,7 @@ const ListBox = styled.div`
     width: 100%;
     border-bottom: 1px solid #9b9b9b;
     padding-bottom: 10px;
+
 
     .text {
         font-size: 16px;
@@ -55,11 +60,11 @@ const DateBox = styled.div`
     }
 `;
 
-const ComentList = ({ listItem, updateClick }) => {
+const ComentList = ({ listItem, updateClick, deleteClick, itemFocus }) => {
     const idNum = listItem._id;
 
     return (
-        <ComentListBlock>
+        <ComentListBlock check={itemFocus === idNum}>
             <DateBox>
                 <div className="username">
                     {listItem.username}
@@ -76,7 +81,7 @@ const ComentList = ({ listItem, updateClick }) => {
                     <span className="update" onClick={updateClick} id={idNum}>
                         수정
                     </span>
-                    <span className="delete">
+                    <span className="delete" onClick={deleteClick} id={idNum}>
                         삭제
                     </span>
                 </div>

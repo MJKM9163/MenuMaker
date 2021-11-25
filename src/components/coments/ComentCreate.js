@@ -44,13 +44,16 @@ const Coment = ({ addCreate, bodyUpDate, error, enterPress,
     
     return (
         <ComentBlock>
-            <input
-                type="text"
-                className="username"
-                placeholder="사용자 이름 입력(최대 8글자)"
-                onChange={bodyUpDate}
-                value={username}
-                disabled={changeInput} />
+            {changeInput ?
+                (null)
+            :
+                (<input
+                    type="text"
+                    className="username"
+                    placeholder="사용자 이름 입력(최대 8글자)"
+                    onChange={bodyUpDate}
+                    value={username}
+                    disabled={changeInput} />)}
             {changeInput ?
                 (<input
                     type="text"
