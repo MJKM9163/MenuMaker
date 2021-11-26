@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ComentCreate from '../../components/coments/ComentCreate';
@@ -39,10 +40,9 @@ const LoadingBox = styled.div`
     height: 650px;
 `;
 
-const ComentContainer = () => {
+const ComentContainer = ({ history }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
     const [listRender, setListRender] = useState(true);
     const [changeButton, setChangeButton] = useState(false);
     const [changeInput, setChangeInput] = useState(false);
@@ -53,11 +53,7 @@ const ComentContainer = () => {
     const body = useSelector(({ coment }) => 
         coment.body,
     );
-
-    const username = useSelector(({ coment }) =>
-        coment.username,
-    );
-
+    
     const listDate = useSelector(({ coment }) =>
         coment.listDate,
     );
@@ -66,27 +62,15 @@ const ComentContainer = () => {
         coment.error,
     );
 
+    const { setUser } = useSelector(({ auth }) => ({
+        setUser: auth.setUser,
+    }));
+
+    const { username } = setUser; //쿠키에 든 userId
+
     const bodyUpDate = (e) => {
         const { value, className } = e.target;
-        if (className === "username_0" && value.length < 9) {
-            e.target.className = "username";
-            dispatch(changeText({
-                form: className,
-                value,
-            }));
-            setError(false);
-        }
-        if (className === "username") {
-            if(value.length < 9) {
-                dispatch(changeText({
-                    form: className,
-                    value,
-                }));
-            } else if (value.length >= 9) {
-                setError(true);
-                e.target.className = "username_0";
-            };
-        } else if (className === "body") {
+        if (className === "body") {
             dispatch(changeText({
                 form: className,
                 value,
@@ -161,7 +145,11 @@ const ComentContainer = () => {
             setChangeInput(false);
             setChangeButton(false);
             setItemFocus(false);
-        }
+        };
+    };
+
+    const backMove = () => {
+        history.push('/')
     }
 
     useEffect(() => {
@@ -180,10 +168,11 @@ const ComentContainer = () => {
     return (
         <ComentBox>
             <TopMenu>댓글을 남겨주세요
-                <div className="close">뒤로</div>
+                <div className="close" onClick={backMove}>뒤로</div>
             </TopMenu>
             {loading ?
                 (<ComentListContainer
+                    username={username}
                     listDate={listDate}
                     updateClick={updateClick}
                     deleteClick={deleteClick}
@@ -193,10 +182,6 @@ const ComentContainer = () => {
                     itemFocus={itemFocus}/>)
                 :
                 (<LoadingBox>댓글 목록을 불러오는 중입니다..</LoadingBox>)}
-            {error ?
-                (<ErrorBox>글자가 너무 많아요</ErrorBox>)
-                :
-                (null)}
             {serverError ?
                 (<ErrorBox>수정할 내용이 없어요</ErrorBox>)
                 :
@@ -204,7 +189,6 @@ const ComentContainer = () => {
             <ComentCreate
                 addCreate={addCreate}
                 bodyUpDate={bodyUpDate}
-                error={error}
                 enterPress={enterPress}
                 username={username}
                 body={body}
@@ -215,4 +199,4 @@ const ComentContainer = () => {
     );
 };
 
-export default ComentContainer;
+export default withRouter(ComentContainer);

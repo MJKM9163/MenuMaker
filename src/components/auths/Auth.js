@@ -55,7 +55,14 @@ const AddRegister = styled.div`
     }
 `;
 
-const Auth = ({ username, password, password_check, change, registerChange, formChange }) => {
+const ErrorBox = styled.div`
+    color: red;
+    margin-bottom: 10px;
+`
+
+const Auth = ({ username, password, password_check, error,
+    change, registerChange, formChange, submitClick }) => {
+
     return (
         <AuthBlock>
             <Header>
@@ -86,10 +93,11 @@ const Auth = ({ username, password, password_check, change, registerChange, form
                 (null)}
             </CheckBox>
             <ButtonBox>
+            {error === 1 ? (<ErrorBox>비밀번호가 일치하지 않습니다.</ErrorBox>) : (null)}
             {formChange ?
-                (<button>회원가입</button>)
+                (<button onClick={submitClick} className="register">회원가입</button>)
                 :
-                (<button>로그인</button>)}
+                (<button onClick={submitClick} className="login">로그인</button>)}
             </ButtonBox>
             <AddRegister onClick={registerChange}>{formChange ? "로그인하기" : "회원가입하기"}</AddRegister>
 

@@ -40,7 +40,7 @@ const WhiteBox = styled.div`
     }
 `
 
-const ComentListContainer = ({ listDate, updateClick, deleteClick, deleteBox,
+const ComentListContainer = ({ listDate, username, updateClick, deleteClick, deleteBox,
     deleteBoxCancel, deleteStart, itemFocus }) => {
 
     return (
@@ -61,6 +61,7 @@ const ComentListContainer = ({ listDate, updateClick, deleteClick, deleteBox,
                 <ComentList
                     listItem={listItem}
                     key={listItem._id}
+                    username={username}
                     updateClick={updateClick}
                     deleteClick={deleteClick}
                     itemFocus={itemFocus}/>

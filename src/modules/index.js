@@ -4,7 +4,7 @@ import maker, { menuSaga } from './maker';
 import DBSave, { dbSaveSaga } from './DBSave';
 import setting, { menuList } from './setting';
 import coment, { comentSaga } from './coment';
-import auth from './auth';
+import auth, { authSaga } from './auth';
 
 const rootReducer = combineReducers({
     maker,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 });
 
 export function* rootSaga() {
-    yield all([dbSaveSaga(), menuSaga(), menuList(), comentSaga()]);
+    yield all([dbSaveSaga(), menuSaga(), menuList(), comentSaga(), authSaga()]);
 };
 
 export default rootReducer;

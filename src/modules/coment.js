@@ -39,7 +39,7 @@ export const errorNull = createAction(
 );
 
 const initialState = {
-    create: null,
+    user: null,
     listDate: null,
     body: '',
     username: '',
@@ -59,9 +59,9 @@ export function* comentSaga() {
 
 const coment = handleActions(
     {
-        [COMENT_CREATE_SUCCESS]: (state, { payload: create }) => ({
+        [COMENT_CREATE_SUCCESS]: (state, { payload: form }) => ({
             ...state,
-            create,
+            user: form.user.username,
         }),
         [COMENT_LIST_SUCCESS]: (state, { payload: listDate }) => ({
             ...state,
@@ -69,7 +69,7 @@ const coment = handleActions(
         }),
         [COMENT_UPDATE_SUCCESS]: (state, { payload: create }) => ({
             ...state,
-            create,
+            user: create,
         }),
         // [COMENT_DELETE_SUCCESS]: state => ({
         //     ...state,

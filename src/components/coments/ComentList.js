@@ -60,7 +60,7 @@ const DateBox = styled.div`
     }
 `;
 
-const ComentList = ({ listItem, updateClick, deleteClick, itemFocus }) => {
+const ComentList = ({ listItem, username, updateClick, deleteClick, itemFocus }) => {
     const idNum = listItem._id;
 
     return (
@@ -77,14 +77,17 @@ const ComentList = ({ listItem, updateClick, deleteClick, itemFocus }) => {
                 <div className="text">
                     {listItem.body}
                 </div>
-                <div>
-                    <span className="update" onClick={updateClick} id={idNum}>
-                        수정
-                    </span>
-                    <span className="delete" onClick={deleteClick} id={idNum}>
-                        삭제
-                    </span>
-                </div>
+                {listItem.username === username ?
+                    (<div>
+                        <span className="update" onClick={updateClick} id={idNum}>
+                            수정
+                        </span>
+                        <span className="delete" onClick={deleteClick} id={idNum}>
+                            삭제
+                        </span>
+                    </div>)
+                    :
+                    (null)}
             </ListBox>
         </ComentListBlock>
     );

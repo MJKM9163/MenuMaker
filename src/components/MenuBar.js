@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Address from './common/Address';
+import { logout } from '../modules/auth';
 
 const BackDiv = styled.div`
     width: 100%;
@@ -28,6 +30,14 @@ const MenuBarBlock = styled.div`
     .auth {
         width: 100%;
         transform: translateY(20%);
+        button {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+        }
     }
     
     .box {
@@ -55,6 +65,15 @@ const Links = styled(Link)`
 `
 
 const MenuBar = () => {
+    const dispatch = useDispatch();
+
+    const { setUser } = useSelector(({ auth }) => ({
+        setUser: auth.setUser,
+    }));
+
+    const logoutButton = () => {
+        dispatch(logout());
+    }
 
     return (
         <BackDiv>
@@ -63,7 +82,10 @@ const MenuBar = () => {
                     MenuMaker
                 </div>
                 <div className="auth">
-                    <Links to="/login">로그인</Links>
+                    {setUser ?
+                        (<button onClick={logoutButton}>로그아웃</button>)
+                        :
+                        (<Links to="/login">로그인</Links>)}
                 </div>
                 <div className="box">
                     <Links to="/maker">메뉴 만들기</Links>
