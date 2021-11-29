@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ const AuthContainerBlock = styled.div`
 
 const AuthContainer = ({ history }) => {
     const dispatch = useDispatch();
+    const inputRef = useRef(0);
 
     const loginID = useSelector(({ auth }) => 
         auth.loginID,
@@ -67,23 +68,35 @@ const AuthContainer = ({ history }) => {
     const registerChange = () => {
         if (!formChange) {
             setFormChange(true);
+            dispatch(valueChange({ name: "username", value: "" }));
+            dispatch(valueChange({ name: "password", value: "" }));
+            inputRef.current.focus();
             setError(null);
         } else if (formChange) {
             setFormChange(false);
+            dispatch(valueChange({ name: "password_check", value: "" }));
+            inputRef.current.focus();
             setError(null);
         };
     };
 
-    const submitClick = (e) => {
-        if (e.target.className === "register") {
+    const submitClick = (e, type) => {
+        console.log(type)
+        if (e.target.className === "register" || type === "register") {
             if (password === password_check) {
                 dispatch(register({ username, password, password_check }));
                 setFormChange(false);
             } else if (password !== password_check) {
                 setError(1);
             };
-        } else if (e.target.className ==="login") {
+        } else if (e.target.className ==="login" || type === "login") {
             dispatch(login({ username, password }));
+        };
+    };
+
+    const enterPrees = (e) => {
+        if (e.key === "Enter") {
+            submitClick(e, e.target.className);
         };
     };
 
@@ -97,7 +110,9 @@ const AuthContainer = ({ history }) => {
                 formChange={formChange}
                 error={error}
                 registerChange={registerChange}
-                submitClick={submitClick}/>
+                submitClick={submitClick}
+                enterPrees={enterPrees}
+                inputRef={inputRef}/>
         </AuthContainerBlock>
     );
 };

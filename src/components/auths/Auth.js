@@ -61,7 +61,8 @@ const ErrorBox = styled.div`
 `
 
 const Auth = ({ username, password, password_check, error,
-    change, registerChange, formChange, submitClick }) => {
+    change, registerChange, formChange, submitClick, enterPrees,
+    inputRef }) => {
 
     return (
         <AuthBlock>
@@ -72,13 +73,18 @@ const Auth = ({ username, password, password_check, error,
                 <input
                     type="text"
                     name="username"
+                    className={formChange ? ("register") : ("login")}
                     placeholder={formChange ? ("영문, 숫자로 입력하세요") : ("아이디")}
+                    onKeyPress={enterPrees}
                     onChange={change}
+                    ref={inputRef}
                     value={username}/>
                 <input
                     type="password"
                     name="password"
+                    className={formChange ? ("register") : ("login")}
                     placeholder={formChange ? ("새로운 비밀번호 입력") : ("비밀번호")}
+                    onKeyPress={enterPrees}
                     onChange={change}
                     value={password}/>
             
@@ -86,7 +92,9 @@ const Auth = ({ username, password, password_check, error,
                 (<input
                     type="password"
                     name="password_check"
+                    className="register"
                     placeholder="비밀번호 확인"
+                    onKeyPress={enterPrees}
                     onChange={change}
                     value={password_check}/>)
                 :

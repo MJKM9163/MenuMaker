@@ -6,6 +6,7 @@ import SettingContainer from './containers/setting/SettingContainer';
 import ComentContainer from './containers/coments/ComentContainer';
 import DBmakerForm from './containers/DBmakerForm';
 import AuthContainer from './containers/auths/AuthContainer';
+import Test from './components/common/Test';
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
       <Route path="/setting" component={SettingContainer} />
       <Route path="/maker" component={MakerLoading} />
       <Route path="/coment" component={ComentContainer} />
-      <Route path="/register" component={DBmakerForm} />
+      <Route path="/registerOnlylkjdrfs" component={DBmakerForm} />
+      <Route path="/testPage" component={Test} />
     </>
   );
 }

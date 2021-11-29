@@ -25,9 +25,6 @@ const ItemBlock = styled.div`
     .soupBlock {
         color: purple;
     }
-    .oversoup {
-        background-color: #802424;
-    }
     .mainBlock_0 {
         color: red;
     }
@@ -92,7 +89,7 @@ const MaketItem = ({ rice, main, mainNumber, side, sideNumber, soup }) => {
                 <span onMouseOver={addOver} onMouseOut={addOut} className="riceBlock">{rice.menuname}
                 {addNum === 'rice' ? (<OverDiv>{rice.description}</OverDiv>) : (null)}
                 </span> / <span onMouseOver={addOver} onMouseOut={addOut} className="soupBlock">{soup.menuname}
-                {addNum === 'soup' ? (<OverDiv className="oversoup">{soup.description}</OverDiv>) : (null)}
+                {addNum === 'soup' ? (<OverDiv>{soup.description}</OverDiv>) : (null)}
                 </span>
             </div>
             {mainItem.map(item => (

@@ -101,9 +101,11 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
         if (e.target.className === "0") {
             setMainList(mainList.filter(list => list._id !== itemId));
             setOutList([...outList, itemId]);
+            setAble('');
         } else if (e.target.className === "1") {
             setAllMainList(allMainList.filter(list => list._id !== itemId));
             setAllOutList([...allOutList, itemId]);
+            setAble('');
         }
         
     },[mainList, outList, allMainList, allOutList]);
