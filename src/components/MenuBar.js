@@ -126,13 +126,13 @@ const MenuBar = () => {
                         (<Links to="/" className="coment" onMouseEnter={infoUp} onMouseLeave={infoOut}>
                             {info ? ("로그인 후 사용가능") : ("글 남기기")}
                         </Links>)}
-                    {setUser.username === "rhkrrbaudgg" ?
+                    {setUser === "rhkrrbaudgg" ?
                         (<Links to="/registerOnlylkjdrfs">메뉴 DB 저장</Links>)
                         :
                         (<Links to="/" className="db" onMouseEnter={dbUp} onMouseLeave={dbOut}>
                             {db ? ("개발자 전용") : ("메뉴 DB 저장")}
                         </Links>)}
-                    <Links to="/testPage">openAPI TEST</Links>
+                    <Links to="/priceAPI">openAPI TEST</Links>
                 </div>
                 <Address />
             </MenuBarBlock>

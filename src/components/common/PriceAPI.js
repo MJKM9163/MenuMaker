@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { openAPICall } from '../../modules/open';
+import { priceAPICall } from '../../modules/open';
 
 const TestBlock = styled.div`
     width: 100%;
@@ -21,32 +21,34 @@ const TestBlock = styled.div`
 const Test = () => {
 
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const { data } = useSelector(({ open }) => ({
         data: open.data,
     }));
 
     const callTest = () => {
-        dispatch(openAPICall());
+        dispatch(priceAPICall());
         console.log('클릭')
-    }
-    // const API_Key = process.env.REACT_APP_API_KEY;
+    };
 
-    // const testAPI = async() => 
-    //     await axios.get('http://apis.data.go.kr/B552895/LocalGovPriceInfoService', {
-    //     params: {
-    //         serviceKey: API_Key,
-    //         pageNo: 1,
-    //         numOfRows: 10,
-    //         examin_de: 20201128,
-    //         prdlst_nm: "감귤",
-    //     },
-    // });
+    useEffect(() => {
+        if (data) {
+            const { item } = data.response.body.items;
+            setLoading(true);
+            console.log(data);
+            console.log(item[0]);
+        };
+    },[data]);
 
     return (
         <TestBlock>
             <button onClick={callTest}></button>
-            <div>{data}aa</div>
+            {loading ?
+                (<div>{data.response.body.items.item[0].areaNm}
+                {data.response.body.items.item[0].todayPric}</div>)
+                :
+                (null)}
         </TestBlock>
     );
 };
