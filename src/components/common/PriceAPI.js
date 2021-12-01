@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { priceAPICall } from '../../modules/open';
 
-const TestBlock = styled.div`
+const PriceAPIBlock = styled.div`
     width: 100%;
     height: 100vh;
 
@@ -18,7 +18,7 @@ const TestBlock = styled.div`
     }
 `;
 
-const Test = () => {
+const PriceAPI = () => {
 
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -37,20 +37,24 @@ const Test = () => {
             const { item } = data.response.body.items;
             setLoading(true);
             console.log(data);
-            console.log(item[0]);
+            console.log(item);
+            console.log(item.examinPrdlstNm);
+            console.log(item.areaNm);
+            console.log(item.examinMrktNm);
+            console.log(item.stdSpciesNm);
         };
     },[data]);
 
     return (
-        <TestBlock>
+        <PriceAPIBlock>
             <button onClick={callTest}></button>
             {loading ?
-                (<div>{data.response.body.items.item[0].areaNm}
-                {data.response.body.items.item[0].todayPric}</div>)
+                (<div>
+                </div>)
                 :
                 (null)}
-        </TestBlock>
+        </PriceAPIBlock>
     );
 };
 
-export default Test;
+export default PriceAPI;
