@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MakerContainer from './MakerContainer';
 import { makerRice, makerMain, makerSide, makerSoup } from '../../modules/maker';
-//import setting from '../../modules/setting';
 
 const MakerWait = styled.div`
     display: flex;
@@ -52,24 +51,27 @@ const MakerLoading = () => {
     const soups = useSelector(({ maker }) => 
         maker.soups,
     );
+    const percentObject = useSelector(({ setting }) => 
+        setting.percentObject
+    );
 
     const changecheck = (check) => {
         setCheck(false);
         console.log(check)
         if (check === "refresh") {
-            dispatch(makerRice({number, outList, allOutList}))
-            dispatch(makerMain({number, outList, allOutList}))
-            dispatch(makerSide({number, outList, allOutList}))
-            dispatch(makerSoup({number, outList, allOutList}))
+            dispatch(makerRice({number, outList, allOutList, percentObject}))
+            dispatch(makerMain({number, outList, allOutList, percentObject}))
+            dispatch(makerSide({number, outList, allOutList, percentObject}))
+            dispatch(makerSoup({number, outList, allOutList, percentObject}))
         }
     };
 
     useEffect(() => {
-        dispatch(makerRice({number, outList, allOutList}))
-        dispatch(makerMain({number, outList, allOutList}))
-        dispatch(makerSide({number, outList, allOutList}))
-        dispatch(makerSoup({number, outList, allOutList}))
-    },[number, dispatch, outList, allOutList])
+        dispatch(makerRice({number, outList, allOutList, percentObject}))
+        dispatch(makerMain({number, outList, allOutList, percentObject}))
+        dispatch(makerSide({number, outList, allOutList, percentObject}))
+        dispatch(makerSoup({number, outList, allOutList, percentObject}))
+    },[number, dispatch, outList, allOutList, percentObject])
 
     useEffect(() => {
         setTimeout(()=>{

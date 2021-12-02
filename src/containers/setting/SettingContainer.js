@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Setting from '../../components/Setting'
 import { withRouter } from 'react-router-dom';
 import { settingListFind, repeatSetting, mainOut, allOut,
-    mainKeep, mainKeep2 } from '../../modules/setting';
+    mainKeep, mainKeep2, percentObjectSave, costSave } from '../../modules/setting';
 
 
 
@@ -71,6 +71,19 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
     const [outList, setOutList] = useState(defaultOutList);
     const [allMainList, setAllMainList] = useState(allList);
     const [allOutList, setAllOutList] = useState(defaultAllOutList);
+    const [costRatio, setCostRatio] = useState({
+        rice: 0.15,
+        main: 0.5,
+        submain: 0.25,
+        soup: 0.1,
+    })
+    const [percent, setPercent] = useState({
+        rice: 0,
+        main: 0,
+        submain: 0,
+        soup: 0,
+    })
+    const [costValue, setCostValue] = useState('');
 
     useEffect(() => {
         if (!list) {
@@ -90,8 +103,8 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
         if (number !== e.target.value) {
             setNum(e.target.value);
             setSError(false);
-            setAble('');
         } else if (number === e.target.value) {
+            setNum(e.target.value);
             setSError(true);
             setAble('disabled');
         }
@@ -106,18 +119,92 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
             setAllMainList(allMainList.filter(list => list._id !== itemId));
             setAllOutList([...allOutList, itemId]);
             setAble('');
-        }
-        
+        };
     },[mainList, outList, allMainList, allOutList]);
+
+    const outRemove = (selectItam, e) => {
+        if (e.target.className === "out") {
+            setOutList(outList.filter(item => item !== selectItam));
+            setMainList([...mainList, selectItam]);
+            setAble('');
+        } else if (e.target.className === "subOut") {
+            setAllOutList(allOutList.filter(item => item !== selectItam));
+            setAllMainList([...allMainList, { _id: selectItam}]);
+            setAble('');
+        };
+    };
+
+    const costSelection = (e) => {
+        if (e.target.value === "밥") {
+            setCostRatio({
+                rice: 0.3,
+                main: 0.35,
+                submain: 0.25,
+                soup: 0.1,
+            })
+        };
+        if (e.target.value === "메인") {
+            setCostRatio({
+                rice: 0.15,
+                main: 0.5,
+                submain: 0.25,
+                soup: 0.1,
+            })
+        };
+        if (e.target.value === "반찬") {
+            setCostRatio({
+                rice: 0.15,
+                main: 0.3,
+                submain: 0.45,
+                soup: 0.1,
+            })
+        };
+        if (e.target.value === "국") {
+            setCostRatio({
+                rice: 0.1,
+                main: 0.35,
+                submain: 0.25,
+                soup: 0.3,
+            })
+        };
+        setAble('');
+    };
+
+    useEffect(() => {
+        setPercent({
+            rice: costValue * costRatio.rice,
+            main: costValue * costRatio.main,
+            submain: costValue * costRatio.submain,
+            soup: costValue * costRatio.soup,
+            });
+    },[costValue, costRatio])
+
+    useEffect(() => {
+        if (costValue.length <= 3) {
+            setAble('disabled');
+        } else if (costValue.length > 3) {
+            setSError(false);
+            setAble('');
+        }
+    },[costValue, num])
+
+    const costValueChange = (e) => {
+        if (e.target.value.length < e.target.maxLength) {
+            setCostValue(e.target.value);
+            dispatch(costSave(e.target.value))
+            if (e.target.value.length > 3) {
+                setAble('');
+            }
+        }
+    };
 
     const backButton = () => {
         if (buttonChange) {
             setSIn(false);
         } else if (!buttonChange) {
             history.push('/');
-        }
-    }
-
+        };
+    };
 
     const numU_1 = () => {
         changecheck();
@@ -127,23 +214,26 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
         dispatch(allOut(allOutList));
         dispatch(mainKeep(mainList));
         dispatch(mainKeep2(allMainList));
-    }
+        dispatch(percentObjectSave(percent))
+    };
     const numU_2 = () => {
         dispatch(repeatSetting(num));
         dispatch(mainOut(outList));
         dispatch(allOut(allOutList));
         dispatch(mainKeep(mainList));
         dispatch(mainKeep2(allMainList));
+        dispatch(percentObjectSave(percent))
         history.push('/');
-    }
-
+    };
 
     return (
         <SettingContainerBlock>
             {loading ? (<Setting numU_1={numU_1} numU_2={numU_2} changeNum={changeNum} mainRemove={mainRemove}
                         mainList={mainList} allMainList={allMainList} outList={outList} allOutList={allOutList}
                         SError={SError} able={able} settingCtrlClose={settingCtrlClose}
-                        buttonChange={buttonChange} backButton={backButton}/>)
+                        buttonChange={buttonChange} backButton={backButton} outRemove={outRemove}
+                        costSelection={costSelection} costRatio={costRatio} costValue={costValue}
+                        costValueChange={costValueChange} percent={percent}/>)
             :
             (<MakerWait>
                 <h1>설정 화면을 가져오고 있습니다!</h1>

@@ -8,6 +8,8 @@ const MAIN_OUT = 'setting/MAIN_OUT';
 const ALL_OUT = 'setting/ALL_OUT';
 const MAIN_KEEP = 'setting/MAIN_KEEP';
 const MAIN_KEEP2 = 'setting/MAIN_KEEP2';
+const PERCENT = 'setting/PERCENT';
+const COSTVALUE = 'setting/COSTVALUE';
 const LIST_FIND = 'setting/LIST_FIND';
 const LIST_FIND_SUCCESS = 'setting/LIST_FIND_SUCCESS';
 const FAILURE = 'FAILURE';
@@ -30,6 +32,12 @@ export const mainKeep = createAction(
 export const mainKeep2 = createAction(
     MAIN_KEEP2,
 );
+export const percentObjectSave = createAction(
+    PERCENT,
+);
+export const costSave = createAction(
+    COSTVALUE,
+);
 
 const initialState = {
     number: '1',
@@ -40,6 +48,8 @@ const initialState = {
     error: null,
     mainKeep: null,
     mainKeep2: null,
+    percentObject: null,
+    cost: '',
 };
 
 const listSaga = createRequestSaga(LIST_FIND, settingAPI.listSearch);
@@ -69,6 +79,14 @@ const setting = handleActions(
         [MAIN_KEEP2]: (state, { payload: mainKeep2 }) => ({
             ...state,
             allList: mainKeep2,
+        }),
+        [PERCENT]: (state, { payload: percentObject }) => ({
+            ...state,
+            percentObject: percentObject,
+        }),
+        [COSTVALUE]: (state, { payload: cost }) => ({
+            ...state,
+            cost,
         }),
         [LIST_FIND_SUCCESS]: (state, { payload: list }) => ({
             ...state,
