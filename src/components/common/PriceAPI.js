@@ -26,30 +26,35 @@ const PriceAPI = () => {
     const { data } = useSelector(({ open }) => ({
         data: open.data,
     }));
+    const { error } = useSelector(({ open }) => ({
+        error: open.error,
+    }));
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + (today.getDate() - 1)).slice(-2);
+    const dateString = year + '-' + month  + '-' + day;
 
     const callTest = () => {
-        dispatch(priceAPICall());
+        dispatch(priceAPICall(dateString));
         console.log('클릭')
     };
 
     useEffect(() => {
+        console.log(data);
         if (data) {
-            const { item } = data.response.body.items;
-            setLoading(true);
             console.log(data);
-            console.log(item);
-            console.log(item.examinPrdlstNm);
-            console.log(item.areaNm);
-            console.log(item.examinMrktNm);
-            console.log(item.stdSpciesNm);
+            setLoading(true);
         };
-    },[data]);
-
+    },[data, error]);
+    
     return (
         <PriceAPIBlock>
             <button onClick={callTest}></button>
             {loading ?
                 (<div>
+                    나온다!!!!!!!!!!!!
                 </div>)
                 :
                 (null)}
@@ -58,3 +63,7 @@ const PriceAPI = () => {
 };
 
 export default PriceAPI;
+
+// for (let n = 1; n < 2; n++) {
+//     client.get(`/api/openAPIs/priceAPI/${data}/${n.toString()}00`);
+// }

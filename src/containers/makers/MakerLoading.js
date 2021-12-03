@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MakerContainer from './MakerContainer';
 import { makerRice, makerMain, makerSide, makerSoup } from '../../modules/maker';
+import { priceAPICall } from '../../modules/open';
 
 const MakerWait = styled.div`
     display: flex;
@@ -55,6 +56,12 @@ const MakerLoading = () => {
         setting.percentObject
     );
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + (today.getDate() - 1)).slice(-2);
+    const dateString = year + '-' + month  + '-' + day;
+
     const changecheck = (check) => {
         setCheck(false);
         console.log(check)
@@ -74,12 +81,16 @@ const MakerLoading = () => {
     },[number, dispatch, outList, allOutList, percentObject])
 
     useEffect(() => {
+        dispatch(priceAPICall(dateString))
+    },[dateString, dispatch])
+
+    useEffect(() => {
         setTimeout(()=>{
             if (soups) {
                 setCheck(true);
                 console.log("loading 중")
             }
-        },500);
+        },3500);
     },[soups])
 
     return (

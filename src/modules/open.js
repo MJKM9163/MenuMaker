@@ -3,13 +3,13 @@ import createRequestSaga from '../lib/createRequestSaga';
 import { takeLatest } from 'redux-saga/effects';
 import * as openAPI from '../lib/api/open';
 
-const OPEN = 'test/OPEN';
-const OPEN_SUCCESS = 'test/OPEN_SUCCESS';
+const PRICE = 'price/PRICE';
+const PRICE_SUCCESS = 'price/PRICE_SUCCESS';
 
 const FAILURE = 'FAILURE';
 
 export const priceAPICall = createAction(
-    OPEN,
+    PRICE,
 );
 
 const initialState = {
@@ -17,14 +17,14 @@ const initialState = {
     error: null,
 };
 
-const dataSaga = createRequestSaga(OPEN, openAPI.priceAPI);
+const dataSaga = createRequestSaga(PRICE, openAPI.priceAPI);
 export function* openSaga() {
-    yield takeLatest(OPEN, dataSaga);
+    yield takeLatest(PRICE, dataSaga);
 };
 
 const open = handleActions(
     {
-        [OPEN_SUCCESS]: (state, { payload: data }) => ({
+        [PRICE_SUCCESS]: (state, { payload: data }) => ({
             ...state,
             data,
         }),

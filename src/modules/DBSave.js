@@ -6,6 +6,9 @@ import { takeLatest } from 'redux-saga/effects';
 const DB_SAVE = 'save/DB_SAVE';
 const DB_SAVE_SUCCESS = 'save/DB_SAVE_SUCCESS';
 const DB_SAVE_FAILURE = 'save/DB_SAVE_FAILURE';
+const PRICE_SAVE = 'save/PRICE_SAVE';
+const PRICE_SAVE_SUCCESS = 'save/PRICE_SAVE_SUCCESS';
+const PRICE_SAVE_FAILURE = 'save/PRICE_SAVE_FAILURE';
 const CHANGE_FIELD = 'save/CHANGE_FIELD';
 
 export const dbSave = createAction(
@@ -27,6 +30,10 @@ export const change = createAction(
     CHANGE_FIELD,
 );
 
+export const priceSave = createAction(
+    PRICE_SAVE,
+);
+
 
 const initialState = {
     menuname: null,
@@ -41,8 +48,10 @@ const initialState = {
 };
 
 const saveSaga = createRequestSaga(DB_SAVE, saveAPI.dbmenuSave);
+const priceSaga = createRequestSaga(PRICE_SAVE, saveAPI.priceSave);
 export function* dbSaveSaga() {
     yield takeLatest(DB_SAVE, saveSaga);
+    yield takeLatest(PRICE_SAVE, priceSaga);
 };
 
 const DBSave = handleActions (
@@ -63,7 +72,9 @@ const DBSave = handleActions (
         [CHANGE_FIELD]: (state, { payload: { form, value } }) => ({
             ...state,
             [form]: value,
-        })
+        }),
+        [PRICE_SAVE_SUCCESS]: state => initialState,
+        [PRICE_SAVE_FAILURE]: state => initialState,
     },
     initialState,
 );

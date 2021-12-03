@@ -133,6 +133,7 @@ const MenuBar = () => {
                             {db ? ("개발자 전용") : ("메뉴 DB 저장")}
                         </Links>)}
                     <Links to="/priceAPI">openAPI TEST</Links>
+                    {/* <Links to="/pricesave">priceSave</Links> */}
                 </div>
                 <Address />
             </MenuBarBlock>
