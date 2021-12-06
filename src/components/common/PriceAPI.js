@@ -29,12 +29,6 @@ const PriceAPI = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    // const today = new Date();
-    // const year = today.getFullYear();
-    // const month = ('0' + (today.getMonth() + 1)).slice(-2);
-    // const day = ('0' + (today.getDate() - 1)).slice(-2);
-    // const dateString = year + '-' + month  + '-' + day;
-
     const data100 = useSelector(({ priceAPI }) => 
         priceAPI.data100
     );
@@ -42,7 +36,7 @@ const PriceAPI = () => {
         priceAPI.data200
     );
     const data300 = useSelector(({ priceAPI }) => 
-         priceAPI.data300
+        priceAPI.data300
     );
     const data400 = useSelector(({ priceAPI }) => 
         priceAPI.data400
@@ -54,15 +48,35 @@ const PriceAPI = () => {
         priceAPI.data600
     );
 
+    const todayResult = () => {
+        const today = new Date();
+        const dayOut = today.getDay();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2);
+
+        if (dayOut === 0) {
+            const day = ('0' + (today.getDate() - 2)).slice(-2);
+            return year + '-' + month  + '-' + day;
+        } else if (dayOut === 1) {
+            const day = ('0' + (today.getDate() - 3)).slice(-2);
+            return year + '-' + month  + '-' + day;
+        } else if (dayOut === 2||3||4||5||6) {
+            const day = ('0' + (today.getDate() - 1)).slice(-2);
+            return year + '-' + month  + '-' + day;
+        }
+    }
+
+    console.log(todayResult())
+
     const testCall = () => {
         console.log("API 부름!")
-        dispatch(priceList100());
-        dispatch(priceList200());
-        dispatch(priceList300());
-        dispatch(priceList400());
-        dispatch(priceList500());
-        dispatch(priceList600());
-    }
+        dispatch(priceList100(todayResult()));
+        dispatch(priceList200(todayResult()));
+        dispatch(priceList300(todayResult()));
+        dispatch(priceList400(todayResult()));
+        dispatch(priceList500(todayResult()));
+        dispatch(priceList600(todayResult()));
+    };
 
     useEffect(() => {
         console.log("effect 들어옴")

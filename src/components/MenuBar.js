@@ -85,6 +85,10 @@ const MenuBar = () => {
         setUser: auth.setUser,
     }));
 
+    const percentObject = useSelector(({ setting }) => 
+        setting.percentObject
+    );
+
     const logoutButton = () => {
         dispatch(logout());
     };
@@ -105,6 +109,10 @@ const MenuBar = () => {
         setDb(false);
     };
 
+    const alertBox = () => {
+        alert('가격을 설정하지 않았습니다. 가격을 먼저 설정하세요.')
+    }
+
     return (
         <BackDiv>
             <MenuBarBlock>
@@ -118,7 +126,10 @@ const MenuBar = () => {
                         (<Links to="/login">로그인</Links>)}
                 </div>
                 <div className="LinkBox">
-                    <Links to="/maker">메뉴 만들기</Links>
+                    {percentObject ?
+                        (<Links to="/maker">메뉴 만들기</Links>)
+                        :
+                        (<Links to="/" onClick={alertBox}>메뉴 만들기</Links>)}
                     <Links to="/setting">설정</Links>
                     {setUser ?
                         (<Links to="/coment">글 남기기</Links>)
