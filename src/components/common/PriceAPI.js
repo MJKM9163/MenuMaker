@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { priceAPICall } from '../../modules/open';
+import { priceList } from '../../modules/priceAPI';
 
 const PriceAPIBlock = styled.div`
     width: 100%;
@@ -23,38 +23,34 @@ const PriceAPI = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    const { data } = useSelector(({ open }) => ({
-        data: open.data,
-    }));
-    const { error } = useSelector(({ open }) => ({
-        error: open.error,
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    // const day = ('0' + (today.getDate() - 1)).slice(-2);
+    // const dateString = year + '-' + month  + '-' + day;
+
+    const { data } = useSelector(({ priceAPI }) => ({
+        data: priceAPI.data
     }));
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = ('0' + (today.getMonth() + 1)).slice(-2);
-    const day = ('0' + (today.getDate() - 1)).slice(-2);
-    const dateString = year + '-' + month  + '-' + day;
-
-    const callTest = () => {
-        dispatch(priceAPICall(dateString));
-        console.log('클릭')
-    };
+    const testCall = () => {
+        dispatch(priceList());
+    }
 
     useEffect(() => {
-        console.log(data);
         if (data) {
-            console.log(data);
             setLoading(true);
-        };
-    },[data, error]);
+            console.log(data.data.item[0])
+        }
+    },[data])
     
     return (
         <PriceAPIBlock>
-            <button onClick={callTest}></button>
+            <button onClick={testCall}></button>
             {loading ?
                 (<div>
                     나온다!!!!!!!!!!!!
+                    {data.data.item[0].item_name}
                 </div>)
                 :
                 (null)}
@@ -63,7 +59,3 @@ const PriceAPI = () => {
 };
 
 export default PriceAPI;
-
-// for (let n = 1; n < 2; n++) {
-//     client.get(`/api/openAPIs/priceAPI/${data}/${n.toString()}00`);
-// }
