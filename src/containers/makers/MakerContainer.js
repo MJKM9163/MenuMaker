@@ -72,7 +72,8 @@ const MakerContainer = ({ changecheck }) => {
         setSIn(true);
         setButtonChange(true);
     }
-
+console.log(rices.rices[0])
+console.log(rices.rices)
     return (
         <>
             {SIn ? (
@@ -92,7 +93,7 @@ const MakerContainer = ({ changecheck }) => {
                         <MenuListContainer
                             key={key}
                             numberKey={numberKey[key]}
-                            rices={rices[key]}
+                            rices={rices.rices[key]}
                             mains={mains[key]}
                             sides={sides[key]}
                             soups={soups[key]} />

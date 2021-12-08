@@ -14,8 +14,8 @@ const PriceAPIBlock = styled.div`
     height: 100vh;
 
     button {
-        width: 50px;
-        height: 30px;
+        width: 100px;
+        height: 50px;
     }
 
     div {
@@ -78,6 +78,16 @@ const PriceAPI = () => {
         dispatch(priceList600(todayResult()));
     };
 
+    const testtt = () => {
+        const testArray = data100.data.item.filter((item)=> {
+            if (item.item_name === "찹쌀") {
+                return true;
+            }
+            return false;
+        })
+        console.log(testArray);
+    }
+
     useEffect(() => {
         console.log("effect 들어옴")
         if (data100&&data200&&data300&&data400&&data500&&data600) {
@@ -89,6 +99,7 @@ const PriceAPI = () => {
     return (
         <PriceAPIBlock>
             <button onClick={testCall}></button>
+            <button onClick={testtt}>필터 체크</button>
             {loading ?
                 (<div>
                     나온다!!!!!!!!!!!!
