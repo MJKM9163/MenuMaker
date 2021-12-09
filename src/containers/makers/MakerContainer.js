@@ -72,8 +72,7 @@ const MakerContainer = ({ changecheck }) => {
         setSIn(true);
         setButtonChange(true);
     }
-console.log(rices.rices[0])
-console.log(rices.rices)
+console.log(mains.price)
     return (
         <>
             {SIn ? (
@@ -94,7 +93,7 @@ console.log(rices.rices)
                             key={key}
                             numberKey={numberKey[key]}
                             rices={rices.rices[key]}
-                            mains={mains[key]}
+                            mains={mains.mains[key]}
                             sides={sides[key]}
                             soups={soups[key]} />
                     ))}

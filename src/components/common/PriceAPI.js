@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { makerRice, makerMain, makerSide, makerSoup } from '../../modules/maker';
 import {
     priceList100,
     priceList200,
@@ -48,6 +49,26 @@ const PriceAPI = () => {
         priceAPI.data600
     );
 
+    const number = useSelector(({ setting }) =>
+        setting.number,
+    );
+    const outList = useSelector(({ setting }) => 
+        setting.outList,
+    );
+    const allOutList = useSelector(({ setting }) => 
+        setting.allOutList,
+    );
+    const percentObject = useSelector(({ setting }) => 
+        setting.percentObject
+    );
+
+    const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
+        rices: maker.rices,
+        mains: maker.mains,
+        sides: maker.sides,
+        soups: maker.soups,
+    }));
+
     const todayResult = () => {
         const today = new Date();
         const dayOut = today.getDay();
@@ -78,14 +99,17 @@ const PriceAPI = () => {
         dispatch(priceList600(todayResult()));
     };
 
+    
+
     const testtt = () => {
-        const testArray = data100.data.item.filter((item)=> {
-            if (item.item_name === "찹쌀") {
-                return true;
-            }
-            return false;
-        })
-        console.log(testArray);
+        dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+    }
+
+    const consoletest = () => {
+        console.log(mains)
+        console.log(mains.mains)
+        console.log(mains.mains[0])
+        console.log(mains.price)
     }
 
     useEffect(() => {
@@ -100,6 +124,7 @@ const PriceAPI = () => {
         <PriceAPIBlock>
             <button onClick={testCall}></button>
             <button onClick={testtt}>필터 체크</button>
+            <button onClick={consoletest}>콘솔 체크</button>
             {loading ?
                 (<div>
                     나온다!!!!!!!!!!!!

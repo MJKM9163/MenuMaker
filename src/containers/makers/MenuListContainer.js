@@ -26,7 +26,7 @@ const MenuListContainer = ({ rices, mains, sides, soups }) => {
     const Repetition = [0, 1, 2];
     const mainNumber = [0, 2, 4];
     const sideNumber = [0, 3, 6];
-
+    
     return (
         <MenuListContainerBlock>
             {Repetition.map(repeat => (
