@@ -94,8 +94,8 @@ console.log(mains.price)
                             numberKey={numberKey[key]}
                             rices={rices.rices[key]}
                             mains={mains.mains[key]}
-                            sides={sides[key]}
-                            soups={soups[key]} />
+                            sides={sides.sides[key]}
+                            soups={soups.soups[key]} />
                     ))}
                 </MenuListBlock>
                 <ButtonsBlock>

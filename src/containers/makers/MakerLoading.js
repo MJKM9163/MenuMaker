@@ -130,7 +130,7 @@ const MakerLoading = () => {
             setTimeout(()=>{
                 setCheck(true);
                 console.log("로딩 끝!")
-            },2500);
+            },4000);
         }
     },[number, dispatch, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600])
 
