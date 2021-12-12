@@ -124,9 +124,9 @@ const MakerLoading = () => {
             console.log("리스트 로딩 끝!");
             console.log("메뉴 생성 시작");
             dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            dispatch(makerSoup({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            //dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            //dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            //dispatch(makerSoup({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
             setTimeout(()=>{
                 setCheck(true);
                 console.log("로딩 끝!")

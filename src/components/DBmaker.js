@@ -18,8 +18,9 @@ const DBmakerBlock = styled.div`
     }
 
     .testButton {
-        width: 100px;
-        height: 30px;
+        display: block;
+        width: 130px;
+        height: 45px;
     }
 `;
 
@@ -30,8 +31,10 @@ const IngredientArrayBox = styled.div`
 `
 
 
-const DBmaker = ({ onSubmit, onChange, topInput, Arrayupdata, ingredientArray, subInput, subButton, fastClick,
-                menuValue, booleanValue, deValue, maValue, inValue, caValue, cookValue, sauceValue, countryValue }) => {
+const DBmaker = ({ onSubmit, onChange, topInput, Arrayupdata, ingredientArray, subInput, subInput2, subButton,
+    subButton2, fastClick, menuValue, booleanValue, deValue, maValue, inValue, caValue, cookValue,
+    sauceValue, countryValue, ArrayWeightupdata, ingredientWeightArray, fastClick2, maWeightValue,
+    inWeightValue }) => {
     return (
         <DBmakerBlock>
             <form onSubmit={onSubmit}>
@@ -66,12 +69,28 @@ const DBmaker = ({ onSubmit, onChange, topInput, Arrayupdata, ingredientArray, s
                     />
                 <input
                     type="text"
+                    name="main_ingredient_weight"
+                    placeholder="main_weight"
+                    onChange={onChange}
+                    value={maWeightValue}
+                    />
+                <input
+                    type="text"
                     name="ingredient"
                     placeholder="ingredient"
                     onChange={onChange}
                     onKeyUp={fastClick}
                     ref={subInput}
                     value={inValue}
+                    />
+                <input
+                    type="text"
+                    name="ingredient_weight"
+                    placeholder="ingredient_weight"
+                    onChange={onChange}
+                    onKeyUp={fastClick2}
+                    ref={subInput2}
+                    value={inWeightValue}
                     />
                 <input
                     type="text"
@@ -108,13 +127,27 @@ const DBmaker = ({ onSubmit, onChange, topInput, Arrayupdata, ingredientArray, s
                 ref={subButton}
                 onClick={Arrayupdata}>부재료 등록
             </button>
+            <button
+                className="testButton"
+                ref={subButton2}
+                onClick={ArrayWeightupdata}>부재료 무게 등록
+            </button>
             <div style={{color: "orangered"}}>
                 부재료 등록으로 이동하는 키 <strong>Ctrl</strong> (ingredient 에서만 가능)
+            </div>
+            <div style={{color: "orangered"}}>
+                부재료 무게 등록으로 이동하는 키 <strong>Ctrl</strong> (ingredient_weight 에서만 가능)
             </div>
             <div style={{marginTop: "13px"}}>
                 부재료 등록한 목록   
                 <IngredientArrayBox>
                     {ingredientArray}
+                </IngredientArrayBox>
+            </div>
+            <div style={{marginTop: "13px"}}>
+                부재료 무게 등록한 목록   
+                <IngredientArrayBox>
+                    {ingredientWeightArray}
                 </IngredientArrayBox>
             </div>
         </DBmakerBlock>

@@ -84,6 +84,7 @@ const MenuBar = () => {
     const { setUser } = useSelector(({ auth }) => ({
         setUser: auth.setUser,
     }));
+    console.log(setUser)
 
     const percentObject = useSelector(({ setting }) => 
         setting.percentObject

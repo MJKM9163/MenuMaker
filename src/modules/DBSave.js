@@ -12,13 +12,15 @@ const PRICE_SAVE_FAILURE = 'save/PRICE_SAVE_FAILURE';
 const CHANGE_FIELD = 'save/CHANGE_FIELD';
 
 export const dbSave = createAction(
-    DB_SAVE, ({ menuname, main, description, main_ingredient, ingredientArray,
-                category, cook_type, sauce_base, country }) => ({
+    DB_SAVE, ({ menuname, main, description, main_ingredient, main_ingredient_weight, ingredientArray,
+        ingredientWeightArray, category, cook_type, sauce_base, country }) => ({
         menuname,
         main,
         description,
         main_ingredient,
+        main_ingredient_weight,
         ingredientArray,
+        ingredientWeightArray,
         category,
         cook_type,
         sauce_base,
@@ -40,7 +42,9 @@ const initialState = {
     main: null,
     description: null,
     main_ingredient: null,
+    main_ingredient_weight: null,
     ingredient: null,
+    ingredient_weight: null,
     category: null,
     cook_type: null,
     sauce_base: null,
@@ -63,7 +67,9 @@ const DBSave = handleActions (
             main: null,
             description: null,
             main_ingredient: null,
+            main_ingredient_weight: null,
             ingredient: null,
+            ingredient_weight: null,
             category: null,
             cook_type: null,
             sauce_base: null,

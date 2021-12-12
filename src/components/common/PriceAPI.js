@@ -102,17 +102,17 @@ const PriceAPI = () => {
     
 
     const testtt = () => {
-        dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+        dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
     }
 
     const consoletest = () => {
-        console.log(sides)
-        console.log(sides.sides)
-        console.log(sides.sides[0])
-        console.log(sides.sides[0][0])
-        console.log(sides.price)
-        console.log(sides.price[0])
-        console.log(sides.price[0][0])
+        console.log(rices)
+        console.log(rices.rices)
+        console.log(rices.rices[0])
+        console.log(rices.rices[0][0])
+        console.log(rices.rices)
+        console.log(rices.rices[0])
+        console.log(rices.rices[0][0])
     }
 
     useEffect(() => {
