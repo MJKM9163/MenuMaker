@@ -9,11 +9,31 @@ const PatchNoteBlock = styled.div`
     left: 50%;
     margin-left: -12.5rem;
     transform: translateX(-50%);
-    width: 40rem;
-    height: 40rem;
+    width: 500px;
+    height: 600px;
     background: #f1f1f1;
     overflow: auto;
     outline: 1px solid #aaaa;
+    transition: 200ms;
+
+    @media (max-width: 1280px) {
+        top: 100px;
+        width: 450px;
+        height: 520px;
+        transform: translateX(-45%);
+    }
+    @media (max-width: 1024px) {
+        top: 70px;
+        width: 380px;
+        height: 430px;
+        transform: translateX(-40%);
+    }
+    @media (max-width: 800px) {
+        top: 100px;
+        width: 300px;
+        height: 400px;
+        transform: translateX(-50%);
+    }
 `;
 
 const NotoBox = styled.div`
@@ -23,8 +43,18 @@ const NotoBox = styled.div`
 
 const Header = styled.div`
     margin-bottom: 3rem;
-    font-size: 2rem;
+    font-size: 30px;
     border-bottom: 1px solid #666666aa;
+
+    @media (max-width: 1280px) {
+        font-size: 30px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 27px;
+    }
+    @media (max-width: 800px) {
+        font-size: 25px;
+    }
 `;
 
 const Note = styled.div`

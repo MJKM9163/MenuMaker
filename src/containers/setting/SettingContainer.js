@@ -6,9 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { settingListFind, repeatSetting, mainOut, allOut,
     mainKeep, mainKeep2, percentObjectSave, costSave } from '../../modules/setting';
 
-
-
 const SettingContainerBlock = styled.div`
+    width: 100vw;
     height: 100vh;
 `;
 

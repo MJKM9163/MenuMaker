@@ -6,8 +6,6 @@ import SettingContainer from './containers/setting/SettingContainer';
 import ComentContainer from './containers/coments/ComentContainer';
 import DBmakerForm from './containers/DBmakerForm';
 import AuthContainer from './containers/auths/AuthContainer';
-import PriceAPI from './components/common/PriceAPI';
-import PriceSave from './components/PriceSave';
 
 function App() {
 
@@ -19,8 +17,8 @@ function App() {
       <Route path="/maker" component={MakerLoading} />
       <Route path="/coment" component={ComentContainer} />
       <Route path="/registerOnlylkjdrfs" component={DBmakerForm} />
-      <Route path="/priceAPI" component={PriceAPI} />
-      <Route path="/pricesave" component={PriceSave} />
+      {/* <Route path="/priceAPI" component={PriceAPI} />
+      <Route path="/pricesave" component={PriceSave} /> */}
     </>
   );
 }

@@ -29,6 +29,14 @@ const ComentBox = styled.div`
 
 const TopMenu = styled.div`
     font-size: 30px;
+    margin-bottom: 20px;
+    @media (max-width: 1280px) {
+        font-size: 28px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
 `;
 
 const ErrorBox = styled.div`

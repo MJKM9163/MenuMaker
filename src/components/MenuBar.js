@@ -8,7 +8,7 @@ import PatchNote from './common/PatchNote';
 
 const BackDiv = styled.div`
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background: #F9F3DF;
 `;
@@ -19,9 +19,20 @@ const MenuBarBlock = styled.div`
     justify-content: space-between;
     align-items: center;
     background: #F9E4C8;
-    width: 25rem;
+    width: 400px;
     height: 100%;
     border-right: 1px solid #aaaa;
+    transition: 200ms;
+
+    @media (max-width: 1280px) {
+        width: 350px;
+    }
+    @media (max-width: 1024px) {
+        width: 320px;
+    }
+    @media (max-width: 800px) {
+        width: 300px;
+    }
 
     .logo {
         font-size: 22px;
@@ -38,6 +49,18 @@ const MenuBarBlock = styled.div`
             align-items: center;
             justify-content: center;
             font-size: 35px;
+            @media (max-width: 1280px) {
+                height: 80px;
+                font-size: 30px;
+            }
+            @media (max-width: 1024px) {
+                height: 70px;
+                font-size: 30px;
+            }
+            @media (max-width: 800px) {
+                height: 90px;
+                font-size: 24px;
+            }
         }
     };
     
@@ -65,10 +88,23 @@ const Links = styled(Link)`
     color: black;
     background: #F9CF93;
     width: 100%;
-    height: 7rem;
+    height: 110px;
     outline: 1px solid #2e2e2eaa;
     margin-bottom: 1px;
     transition: 200ms;
+
+    @media (max-width: 1280px) {
+        font-size: 32px;
+        height: 97px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 30px;
+        height: 95px;
+    }
+    @media (max-width: 800px) {
+        font-size: 28px;
+        height: 90px;
+    }
 
     :hover {
         background: #fffbb0;
@@ -144,8 +180,6 @@ const MenuBar = () => {
                         (<Links to="/" className="db" onMouseEnter={dbUp} onMouseLeave={dbOut}>
                             {db ? ("개발자 전용") : ("메뉴 DB 저장")}
                         </Links>)}
-                    <Links to="/priceAPI">openAPI TEST</Links>
-                    {/* <Links to="/pricesave">priceSave</Links> */}
                 </div>
                 <Address />
             </MenuBarBlock>

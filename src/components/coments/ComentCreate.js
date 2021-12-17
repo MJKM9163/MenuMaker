@@ -36,7 +36,7 @@ const Coment = ({ addCreate, bodyUpDate, enterPress,
                 (<input
                     type="text"
                     className="body"
-                    placeholder="수정할 내용 입력..(최대 200글자)"
+                    placeholder="수정할 내용 입력..(최대 100글자)"
                     onChange={bodyUpDate}
                     onKeyPress={((e) => enterPress(e, "updateButton"))}
                     value={body} />)
@@ -44,7 +44,7 @@ const Coment = ({ addCreate, bodyUpDate, enterPress,
                 (<input
                     type="text"
                     className="body"
-                    placeholder="내용 입력..(최대 200글자)"
+                    placeholder="내용 입력..(최대 100글자)"
                     onChange={bodyUpDate}
                     onKeyPress={((e) => enterPress(e, "createButton"))}
                     value={body} />)

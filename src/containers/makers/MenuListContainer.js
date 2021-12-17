@@ -6,6 +6,7 @@ const MenuListContainerBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 `;
 
 const ListContainer = styled.div`
@@ -14,14 +15,27 @@ const ListContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 200px;
-    height: ${props => props.charthide ? '500px' : '310px'};
+    width: 210px;
+    height: ${props => props.charthide ? '620px' : '290px'};
     overflow-Y: ${props => props.charthide ? 'hidden' : 'scroll'};
     overflow-X: hidden;
     outline: 1px solid black;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     transition: 0.5s;
+
+    @media (max-width: 1280px) {
+        width: 190px;
+        height: ${props => props.charthide ? '580px' : '280px'};
+    }
+    @media (max-width: 1024px) {
+        width: 175px;
+        height: ${props => props.charthide ? '450px' : '160px'};
+    }
+    @media (max-width: 800px) {
+        width: 150px;
+        height: ${props => props.charthide ? '450px' : '180px'};
+    }
 
     :hover {
         outline: 1px solid red;
@@ -39,11 +53,22 @@ const DataBox = styled.div`
 `;
 
 const Chart = styled.div`
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
     border-radius: 50%;
     transition: 0.5s;
-
+    @media (max-width: 1280px) {
+        width: 190px;
+        height: 190px;
+    }
+    @media (max-width: 1024px) {
+        width: 175px;
+        height: 175px;
+    }
+    @media (max-width: 800px) {
+        width: 150px;
+        height: 150px;
+    }
     .chartText {
         text-align: center;
     }
@@ -140,12 +165,12 @@ const MenuListContainer = ({ rices, mains, sides, soups,
                     />
                 ))}
             </ListContainer>
-            <button className='graphButton' onClick={graphStart}>graphStart</button>
+            <button className='graphButton' onClick={graphStart}>{charthide ? ('그래프 열기'):('그래프 닫기')}</button>
             {charthide ?
             (null)
             :
             (<DataBox style={{opacity:`${chartOpacity}`}}>
-                총 가격 {(riceReduce+mainReduce+sideReduce+soupReduce).toFixed(0)}<br />
+                총 가격 {(riceReduce+mainReduce+sideReduce+soupReduce).toFixed(0)}원<br />
                 <Chart
                     style={
                         {background: `conic-gradient(#ff4e4e 0% ${graphData[0]}%, #2626ff 0% ${graphData[0]+graphData[1]}%, #54be54 0% ${graphData[0]+graphData[1]+graphData[2]}%, #cfcfcf 0% ${graphData[0]+graphData[1]+graphData[2]+graphData[3]}%`}}>

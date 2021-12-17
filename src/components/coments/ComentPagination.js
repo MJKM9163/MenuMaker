@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ComentPaginationBlock = styled.div`
@@ -59,7 +59,7 @@ const ComentPagination = ({listDate, listChange}) => {
         <ComentPaginationBlock>
             <span
                 className={current === 0 ? 'left_end' : 'left'}
-                onClick={()=>currentChange(1)}>&lt;&lt;
+                onClick={()=>currentChange(0)}>&lt;&lt;
             </span>&nbsp;&nbsp;
             <span
                 className={current === 0 ? 'left_end' : 'left'}
@@ -78,7 +78,7 @@ const ComentPagination = ({listDate, listChange}) => {
             </span>&nbsp;&nbsp;
             <span
                 className={current === pageAllNumber-1 ? 'right_end' : 'right'}
-                onClick={()=>currentChange(pageAllNumber)}>&gt;&gt;
+                onClick={()=>currentChange(pageAllNumber-1)}>&gt;&gt;
             </span>
         </ComentPaginationBlock>
     );

@@ -5,7 +5,6 @@ const MakerBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    //font-size: 20px;
     h3 {
         margin: 0;
     }
@@ -16,9 +15,21 @@ const ItemBlock = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    @media (max-width: 1024px) {
+        font-size: 16px;
+    }
+    @media (max-width: 800px) {
+        font-size: 14px;
+    }
 
     .tiemName {
         font-size: 20px;
+        @media (max-width: 1024px) {
+            font-size: 18px;
+        }
+        @media (max-width: 800px) {
+            font-size: 16px;
+        }
         :hover {
             width: 100%;
             background-color: #dadada;
@@ -70,8 +81,6 @@ const ItemBlock = styled.div`
 
 const OverDiv = styled.div`
     position: fixed;
-    /* right: 50%;
-    transform: translate(-50%); */
     color: black;
     background-color: #b1b1b1;
 `
@@ -88,8 +97,6 @@ const PriceDiv = styled.div`
 
 const AllPriceDiv = styled.div`
     position: fixed;
-    //left: 50%;
-    //transform: translate(-50%, -50px);
     color: black;
     background-color: #60e7ff;
 `

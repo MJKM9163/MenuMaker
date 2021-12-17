@@ -8,7 +8,7 @@ const AddressBlock = styled.div`
 const Address = () => {
     return (
         <AddressBlock>
-            기능 추가, 오류 제보<br />
+            {/* 기능 추가, 오류 제보<br /> */}
             <b>rhkrrbaudgg@naver.com</b>
         </AddressBlock>
     );

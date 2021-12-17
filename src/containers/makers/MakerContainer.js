@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MenuListContainer from './MenuListContainer';
 import SettingContainer from '../setting/SettingContainer';
+import { withRouter } from 'react-router-dom';
 
 const MakerContainerBlock = styled.div`
     display: flex;
@@ -10,9 +11,10 @@ const MakerContainerBlock = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    overflow-y: hidden;
 
     .top_text {
-        font-size: 30px;
+        font-size: 23px;
         cursor: default;
     }
 `;
@@ -21,14 +23,8 @@ const MenuListBlock = styled.div`
     display: flex;
     width: 100%;
     height: 650px;
-    outline: 1px solid black;
     justify-content: space-around;
-    //align-items: center;
-
-    :hover {
-        outline: 1px solid rgb(23, 170, 255);
-    }
-`
+`;
 
 const ButtonsBlock = styled.div`
     display: flex;
@@ -38,17 +34,28 @@ const ButtonsBlock = styled.div`
         width: 70px;
         height: 70px;
         margin: 0px 20px 10px 20px;
+        @media (max-width: 1024px) {
+            width: 60px;
+            height: 60px;
+            margin: 0px 15px 5px 15px;
+        }
+        @media (max-width: 800px) {
+            width: 60px;
+            height: 60px;
+            margin: 0px 15px 5px 15px;
+        }
     }
-`
+`;
 
 const SlideSetting = styled.div`
     position: fixed;
     width: 650px;
     height: 100%;
-`
+    z-index: 2;
+`;
 
 
-const MakerContainer = ({ changecheck }) => {
+const MakerContainer = ({ changecheck, history }) => {
 
     const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
         rices: maker.rices,
@@ -62,7 +69,7 @@ const MakerContainer = ({ changecheck }) => {
     const keys = [0, 1, 2, 3, 4, 5, 6, 7];
     const numberKey = [0, 1, 2, 3, 4, 5, 6];
 
-    keys.splice(number, 8 - number)
+    keys.splice(number, 8 - number);
 
     const [SIn, setSIn] = useState(false);
     const [buttonChange, setButtonChange] = useState(false);
@@ -70,8 +77,12 @@ const MakerContainer = ({ changecheck }) => {
     const settingCtrl = () => {
         setSIn(true);
         setButtonChange(true);
-    }
-console.log(mains)
+    };
+
+    const backButton = () => {
+        history.push('/');
+    };
+
     return (
         <>
             {SIn ? (
@@ -104,11 +115,11 @@ console.log(mains)
                 <ButtonsBlock>
                     <button onClick={settingCtrl}>설정</button>
                     <button onClick={()=>changecheck("refresh")}>재생성</button>
-                    {/* <button>프린트<br />(미구현)</button> */}
+                    <button onClick={backButton}>뒤로</button>
                 </ButtonsBlock>
             </MakerContainerBlock>
         </>
     );
 };
 
-export default MakerContainer;
+export default withRouter(MakerContainer);

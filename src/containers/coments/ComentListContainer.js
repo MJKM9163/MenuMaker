@@ -7,7 +7,7 @@ const ComentListContainerBlock = styled.div`
     flex-direction: column;
     align-items: center;
     width: 600px;
-    height: 580px;
+    height: 550px;
     overflow: auto;
 `;
 

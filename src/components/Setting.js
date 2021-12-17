@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
-
 const SettingBlock = styled.div`
     display: flex;
     flex-direction: column;
@@ -18,27 +17,22 @@ const SettingBlock = styled.div`
         .logo {
             font-size: 25px;
         }
-
-        .back {
-            position: absolute;
-            right: 0px;
-            font-size: 25px;
-            cursor: pointer;
-        }
     }
 `;
 
 const InputBlock = styled.div`
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: 500px;
 
-    .final {
-        width: 7rem;
-        height: 3rem;
-        font-size: 15px;
-        margin-left: 175px;
-        margin-top: 50px;
+    @media (max-width: 1280px) {
+        width: 450px;
+    }
+    @media (max-width: 1024px) {
+        width: 400px;
+    }
+    @media (max-width: 800px) {
+        width: 300px;
     }
 `;
 
@@ -47,6 +41,16 @@ const CostBox = styled.div`
     flex-direction: column;
     margin: 15px 0px;
     font-size: 30px;
+    
+    @media (max-width: 1280px) {
+        font-size: 27px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 25px;
+    }
+    @media (max-width: 800px) {
+        font-size: 20px;
+    }
 
     .costTextBox {
         display: flex;
@@ -59,6 +63,12 @@ const CostBox = styled.div`
         .costText {
             width: 150px;
             font-size: 20px;
+            @media (max-width: 1024px) {
+                font-size: 18px;
+            }
+            @media (max-width: 800px) {
+                font-size: 15px;
+            }
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -78,6 +88,12 @@ const CostBox = styled.div`
         select {
             width: 120px;
             font-size: 20px;
+            @media (max-width: 1024px) {
+                font-size: 18px;
+            }
+            @media (max-width: 800px) {
+                font-size: 18px;
+            }
         }
     }
 
@@ -101,15 +117,34 @@ const Inputs = styled.div`
     margin: 15px 0px;
     font-size: 30px;
     justify-content: space-between;
+
+    @media (max-width: 1280px) {
+        font-size: 27px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 25px;
+    }
+    @media (max-width: 800px) {
+        font-size: 20px;
+    }
+    
     :hover {
         background: #ebebeb;
     }
-
 
     input, select {
         text-align: right;
         font-size: 30px;
         width: 120px;
+        @media (max-width: 1280px) {
+            font-size: 24px;
+        }
+        @media (max-width: 1024px) {
+            font-size: 18px;
+        }
+        @media (max-width: 800px) {
+            font-size: 18px;
+        }
     }
 
     :nth-child(3){
@@ -130,6 +165,16 @@ const ExSelectBox = styled.div`
     display: flex;
     font-size: 30px;
     justify-content: space-between;
+
+    @media (max-width: 1280px) {
+        font-size: 27px;
+    }
+    @media (max-width: 1024px) {
+        font-size: 25px;
+    }
+    @media (max-width: 800px) {
+        font-size: 18px;
+    }
     :hover {
         background: #ebebeb;
     }
@@ -167,6 +212,15 @@ const SelectDiv = styled.div`
     width: 500px;
     height: 500px;
     background: whitesmoke;
+
+
+    @media (max-width: 1024px) {
+        height: 450px;
+    }
+    @media (max-width: 800px) {
+        width: 400px;
+        height: 400px;
+    }
 `;
 
 const TopDiv = styled.div`
@@ -178,11 +232,19 @@ const TopDiv = styled.div`
     height: 50px;
     text-align: center;
 
+    @media (max-width: 1280px) {
+        border: 0px solid;
+    }
+    @media (max-width: 800px) {
+        width: 400px;
+        border: 0px solid;
+    }
+
     .close {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        border: 1px solid;
+        border-left: 1px solid;
         width: 50px;
         height: 100%;
         text-align: right;
@@ -192,17 +254,64 @@ const TopDiv = styled.div`
 
 const SearchDiv = styled.div`
     border: 1px solid;
-    width: 450px;
-    height: 430px;
+    width: 100%;
+    height: 100%;
 
     span {
         font-size: 20px;
         cursor: pointer;
+        @media (max-width: 1280px) {
+            font-size: 18px;
+        }
+        @media (max-width: 800px) {
+            font-size: 16px;
+        }
         :hover {
             background: #bbbbbb;
         }
         .mainOut {
 
+        }
+    }
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .final {//button
+        width: 150px;
+        height: 70px;
+        font-size: 15px;
+        margin-top: 30px;
+
+        @media (max-width: 1024px) {
+            width: 120px;
+            height: 50px;
+            margin-top: 0px;
+        }
+        @media (max-width: 800px) {
+            width: 100px;
+            height: 40px;
+            margin-top: 0px;
+        }
+    }
+    .back {
+        width: 150px;
+        height: 70px;
+        font-size: 15px;
+        margin-top: 30px;
+
+        @media (max-width: 1024px) {
+            width: 120px;
+            height: 50px;
+            margin-top: 0px;
+        }
+        @media (max-width: 800px) {
+            width: 100px;
+            height: 40px;
+            margin-top: 0px;
         }
     }
 `;
@@ -259,7 +368,6 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                 </SelectDiv>) : (null)}
             <header>
                 <div className="logo">설정 화면</div>
-                <div className="back" onClick={backButton}>닫기</div>
             </header>
             <InputBlock>
                 <CostBox>
@@ -335,11 +443,13 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                     ))) : ("없음")}
                 </ExBox>
                 {SError ? (<ErrorBox>메뉴 생성 수를 변경하세요!</ErrorBox>) : (null)}
+                <Buttons>
                 {buttonChange ?
                 (<button name="inSet" onClick={numU_1} disabled={able} className="final">설정 변경</button>)
                 :
                 (<button name="mainSet" onClick={numU_2} disabled={able} className="final">설정 변경</button>)}
-
+                <button className="back" onClick={backButton}>닫기</button>
+                </Buttons>
             </InputBlock>
             <div className="address">
                 rhkrrbaudgg@naver.com
