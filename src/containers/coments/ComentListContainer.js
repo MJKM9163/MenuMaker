@@ -7,8 +7,7 @@ const ComentListContainerBlock = styled.div`
     flex-direction: column;
     align-items: center;
     width: 600px;
-    height: 650px;
-    background: #d4d4d4;
+    height: 580px;
     overflow: auto;
 `;
 
@@ -41,7 +40,8 @@ const WhiteBox = styled.div`
 `
 
 const ComentListContainer = ({ listDate, username, updateClick, deleteClick, deleteBox,
-    deleteBoxCancel, deleteStart, itemFocus }) => {
+    deleteBoxCancel, deleteStart, itemFocus, pageListNum }) => {
+        const page = listDate.slice(pageListNum*10, 10+(pageListNum*10))
 
     return (
         <ComentListContainerBlock>
@@ -57,7 +57,7 @@ const ComentListContainer = ({ listDate, username, updateClick, deleteClick, del
                 </DeleteCheckBox>)
                 :
                 (null)}
-            {listDate.map(listItem => (
+            {page.map(listItem => (
                 <ComentList
                     listItem={listItem}
                     key={listItem._id}

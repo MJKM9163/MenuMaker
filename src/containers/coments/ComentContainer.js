@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ComentCreate from '../../components/coments/ComentCreate';
+import ComentPagination from '../../components/coments/ComentPagination';
 import ComentListContainer from './ComentListContainer';
 import Address from '../../components/common/Address';
 import { comentDelete } from '../../lib/api/coment';
@@ -37,7 +38,7 @@ const ErrorBox = styled.div`
 
 const LoadingBox = styled.div`
     width: 600px;
-    height: 650px;
+    height: 580px;
 `;
 
 const ComentContainer = ({ history }) => {
@@ -49,6 +50,7 @@ const ComentContainer = ({ history }) => {
     const [idValue, setIdValue] = useState(null);
     const [itemFocus, setItemFocus] = useState(false);
     const [deleteBox, setDeleteBox] = useState(false);
+    const [pageListNum, setPageListNum] = useState(0);
 
     const body = useSelector(({ coment }) => 
         coment.body,
@@ -148,22 +150,27 @@ const ComentContainer = ({ history }) => {
         };
     };
 
+    const listChange = (num) => {
+        setPageListNum(num);
+        //setListRender(true);
+    };
+
     const backMove = () => {
-        history.push('/')
-    }
+        history.push('/');
+    };
 
     useEffect(() => {
         if (listRender) {
             dispatch(comentList());
             setListRender(false);
         };
-    },[dispatch, listRender]);
+    },[dispatch, listRender, pageListNum]);
 
     useEffect(() => {
         if (listDate) {
             setLoading(true);
         }
-    },[listDate])
+    },[listDate]);
 
     return (
         <ComentBox>
@@ -179,9 +186,16 @@ const ComentContainer = ({ history }) => {
                     deleteBox={deleteBox}
                     deleteStart={deleteStart}
                     deleteBoxCancel={deleteBoxCancel}
-                    itemFocus={itemFocus}/>)
+                    itemFocus={itemFocus}
+                    pageListNum={pageListNum} />)
                 :
                 (<LoadingBox>댓글 목록을 불러오는 중입니다..</LoadingBox>)}
+            {loading ?
+                (<ComentPagination
+                    listDate={listDate}
+                    listChange={listChange} />)
+                :
+                (null)}
             {serverError ?
                 (<ErrorBox>수정할 내용이 없어요</ErrorBox>)
                 :

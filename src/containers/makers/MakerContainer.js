@@ -11,8 +11,8 @@ const MakerContainerBlock = styled.div`
     flex-direction: column;
     height: 100vh;
 
-    .logo {
-        font-size: 22px;
+    .top_text {
+        font-size: 30px;
         cursor: default;
     }
 `;
@@ -23,7 +23,7 @@ const MenuListBlock = styled.div`
     height: 650px;
     outline: 1px solid black;
     justify-content: space-around;
-    align-items: center;
+    //align-items: center;
 
     :hover {
         outline: 1px solid rgb(23, 170, 255);
@@ -49,7 +49,6 @@ const SlideSetting = styled.div`
 
 
 const MakerContainer = ({ changecheck }) => {
-    //const dispatch = useDispatch()
 
     const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
         rices: maker.rices,
@@ -72,7 +71,7 @@ const MakerContainer = ({ changecheck }) => {
         setSIn(true);
         setButtonChange(true);
     }
-console.log(mains.price)
+console.log(mains)
     return (
         <>
             {SIn ? (
@@ -84,24 +83,28 @@ console.log(mains.price)
                 null
             )}
             <MakerContainerBlock>
-                <div className="logo">
-                    만들기 컨테이너 컴포넌트입니다.
+                <div className="top_text">
+                    메뉴표
                 </div>
                 <MenuListBlock>
-                    {keys.map(key => (
+                    {keys.map(dayNumber => (
                         <MenuListContainer
-                            key={key}
-                            numberKey={numberKey[key]}
-                            rices={rices.rices[key]}
-                            mains={mains.mains[key]}
-                            sides={sides.sides[key]}
-                            soups={soups.soups[key]} />
+                            key={dayNumber}
+                            numberKey={numberKey[dayNumber]}
+                            rices={rices.rices[dayNumber]}
+                            mains={mains.mains[dayNumber]}
+                            sides={sides.sides[dayNumber]}
+                            soups={soups.soups[dayNumber]}
+                            ricesPrice={rices.price[dayNumber]}
+                            mainsPrice={mains.price[dayNumber]}
+                            sidesPrice={sides.price[dayNumber]}
+                            soupsPrice={soups.price[dayNumber]} />
                     ))}
                 </MenuListBlock>
                 <ButtonsBlock>
                     <button onClick={settingCtrl}>설정</button>
                     <button onClick={()=>changecheck("refresh")}>재생성</button>
-                    <button>프린트<br />(미구현)</button>
+                    {/* <button>프린트<br />(미구현)</button> */}
                 </ButtonsBlock>
             </MakerContainerBlock>
         </>

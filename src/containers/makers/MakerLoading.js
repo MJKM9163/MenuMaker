@@ -55,6 +55,15 @@ const MakerLoading = () => {
     const allOutList = useSelector(({ setting }) => 
         setting.allOutList,
     );
+    const rices = useSelector(({ maker }) => 
+        maker.rices,
+    );
+    const mains = useSelector(({ maker }) => 
+        maker.mains,
+    );
+    const sides = useSelector(({ maker }) => 
+        maker.sides,
+    );
     const soups = useSelector(({ maker }) => 
         maker.soups,
     );
@@ -123,23 +132,21 @@ const MakerLoading = () => {
         if (data100&&data200&&data300&&data400&&data500&&data600) {
             console.log("리스트 로딩 끝!");
             console.log("메뉴 생성 시작");
-            //dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            //dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            //dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
             dispatch(makerSoup({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
-            setTimeout(()=>{
-                setCheck(true);
-                console.log("로딩 끝!")
-            },4000);
         }
     },[number, dispatch, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600])
 
-    // useEffect(() => {
-    //     setTimeout(()=>{
-    //         setCheck(true);
-    //         console.log("로딩 끝!")
-    //     },2500);
-    // },[])
+    useEffect(() => {
+        if (rices&&mains&&sides&&soups) {
+            setTimeout(()=>{
+                setCheck(true);
+                console.log("로딩 끝!")
+            },500);
+        }
+    },[rices, mains, sides, soups])
 
     return (
         <>
