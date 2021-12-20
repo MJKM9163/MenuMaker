@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Address from './common/Address';
 import { logout } from '../modules/auth';
-import PatchNote from './common/PatchNote';
+//import PatchNote from './common/PatchNote';
 
 const BackDiv = styled.div`
     display: flex;
@@ -127,7 +127,7 @@ const MenuBar = () => {
     const dispatch = useDispatch();
 
     const [info, setInfo] = useState(false);
-    const [db, setDb] = useState(false);
+    // const [db, setDb] = useState(false);
 
     const { setUser } = useSelector(({ auth }) => ({
         setUser: auth.setUser,
@@ -149,13 +149,13 @@ const MenuBar = () => {
         setInfo(false);
     };
 
-    const dbUp = () => {
-        setDb(true);
-    };
+    // const dbUp = () => {
+    //     setDb(true);
+    // };
 
-    const dbOut = () => {
-        setDb(false);
-    };
+    // const dbOut = () => {
+    //     setDb(false);
+    // };
 
     const alertBox = () => {
         alert('가격을 설정하지 않았습니다. 가격을 먼저 설정하세요.')
@@ -185,12 +185,12 @@ const MenuBar = () => {
                         (<Links to="/" className="coment" onMouseEnter={infoUp} onMouseLeave={infoOut}>
                             {info ? ("로그인 후 사용가능") : ("글 남기기")}
                         </Links>)}
-                    {setUser === "rhkrrbaudgg" ?
+                    {/* {setUser === "rhkrrbaudgg" ?
                         (<Links to="/registerOnlylkjdrfs">메뉴 DB 저장</Links>)
                         :
                         (<Links to="/" className="db" onMouseEnter={dbUp} onMouseLeave={dbOut}>
                             {db ? ("개발자 전용") : ("메뉴 DB 저장")}
-                        </Links>)}
+                        </Links>)} */}
                 </div>
                 <Address />
             </MenuBarBlock>
