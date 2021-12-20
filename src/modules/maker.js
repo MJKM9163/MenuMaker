@@ -7,10 +7,13 @@ const MENU_RICE_MAKER = 'maker/MENU_RICE_MAKER';
 const MENU_MAIN_MAKER = 'maker/MENU_MAIN_MAKER';
 const MENU_SIDE_MAKER = 'maker/MENU_SIDE_MAKER';
 const MENU_SOUP_MAKER = 'maker/MENU_SOUP_MAKER';
+const INITIAL = 'maker/INITIAL';
+const LOCK = 'maker/LOCK';
 const MENU_RICE_MAKER_SUCCESS = 'maker/MENU_RICE_MAKER_SUCCESS';
 const MENU_MAIN_MAKER_SUCCESS = 'maker/MENU_MAIN_MAKER_SUCCESS';
 const MENU_SIDE_MAKER_SUCCESS = 'maker/MENU_SIDE_MAKER_SUCCESS';
 const MENU_SOUP_MAKER_SUCCESS = 'maker/MENU_SOUP_MAKER_SUCCESS';
+//const INITIAL_SUCCESS = 'maker/INITIAL_SUCCESS';
 
 const FAILURE = 'FAILURE';
 
@@ -26,6 +29,12 @@ export const makerSide = createAction(
 export const makerSoup = createAction(
     MENU_SOUP_MAKER, (number) => (number),
 );
+export const initial = createAction(
+    INITIAL,
+);
+export const lock = createAction(
+    LOCK,
+);
 
 const initialState = {
     rices: null,
@@ -33,6 +42,7 @@ const initialState = {
     sides: null,
     soups: null,
     error: null,
+    lock: false,
 };
 
 const riceSaga = createRequestSaga(MENU_RICE_MAKER, menuAPI.riceListCall);
@@ -63,6 +73,11 @@ const maker = handleActions(
         [MENU_SOUP_MAKER_SUCCESS]: (state, { payload: soups }) => ({
             ...state,
             soups,
+        }),
+        [INITIAL]: state => initialState,
+        [LOCK]: (state, { payload: lock }) => ({
+            ...state,
+            lock,
         }),
         [FAILURE]: (state, { payload: errer }) => ({
             ...state,

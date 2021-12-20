@@ -208,11 +208,10 @@ const SelectDiv = styled.div`
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    border: 1px solid;
+    border: 1px solid #555555;
     width: 500px;
     height: 500px;
     background: whitesmoke;
-
 
     @media (max-width: 1024px) {
         height: 450px;
@@ -221,43 +220,55 @@ const SelectDiv = styled.div`
         width: 400px;
         height: 400px;
     }
+    @media (max-width: 425px) {
+        width: 300px;
+        height: 400px;
+    }
 `;
 
 const TopDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid;
+    border-bottom: 1px solid #555555;
     width: 500px;
     height: 50px;
     text-align: center;
 
-    @media (max-width: 1280px) {
-        border: 0px solid;
-    }
     @media (max-width: 800px) {
         width: 400px;
-        border: 0px solid;
+    }
+    @media (max-width: 425px) {
+        width: 300px;
     }
 
     .close {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        border-left: 1px solid;
+        border-left: 1px solid #555555;
         width: 50px;
         height: 100%;
         text-align: right;
         cursor: pointer;
+        background-color: #ff7979;
+        :hover {
+            background-color: #ffa8a8;
+        }
     }
 `;
 
 const SearchDiv = styled.div`
-    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-Y: auto;
     width: 100%;
     height: 100%;
 
     span {
+        width: 100%;
+        text-align: center;
         font-size: 20px;
         cursor: pointer;
         @media (max-width: 1280px) {
@@ -265,6 +276,10 @@ const SearchDiv = styled.div`
         }
         @media (max-width: 800px) {
             font-size: 16px;
+        }
+        @media (max-width: 800px) {
+            font-size: 22px;
+            margin-bottom: 7px;
         }
         :hover {
             background: #bbbbbb;

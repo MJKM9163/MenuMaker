@@ -17,7 +17,7 @@ const ComentBox = styled.div`
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: #b3b3a1;
+    background: #f3f3f3;
     
     .close {
         position: fixed;
@@ -28,14 +28,24 @@ const ComentBox = styled.div`
 `;
 
 const TopMenu = styled.div`
+    width: 100%;
+    text-align: center;
     font-size: 30px;
     margin-bottom: 20px;
+    border-bottom: 1px solid #ebebeb;
     @media (max-width: 1280px) {
         font-size: 28px;
     }
     @media (max-width: 1024px) {
         font-size: 25px;
         margin-bottom: 5px;
+    }
+    @media (max-width: 425px) {
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    div {
+        background-color: #fca1a1;
     }
 `;
 
@@ -182,8 +192,8 @@ const ComentContainer = ({ history }) => {
 
     return (
         <ComentBox>
-            <TopMenu>댓글을 남겨주세요
-                <div className="close" onClick={backMove}>뒤로</div>
+            <TopMenu>댓글
+                <div className="close" onClick={backMove}>나가기</div>
             </TopMenu>
             {loading ?
                 (<ComentListContainer
@@ -197,7 +207,7 @@ const ComentContainer = ({ history }) => {
                     itemFocus={itemFocus}
                     pageListNum={pageListNum} />)
                 :
-                (<LoadingBox>댓글 목록을 불러오는 중입니다..</LoadingBox>)}
+                (<LoadingBox>목록을 불러오는 중입니다..</LoadingBox>)}
             {loading ?
                 (<ComentPagination
                     listDate={listDate}

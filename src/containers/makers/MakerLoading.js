@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MakerContainer from './MakerContainer';
-import { makerRice, makerMain, makerSide, makerSoup } from '../../modules/maker';
+import { makerRice, makerMain, makerSide, makerSoup, initial, lock } from '../../modules/maker';
 import {
     priceList100,
     priceList200,
@@ -16,9 +16,15 @@ const MakerWait = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    text-align: center;
     height: 100vh;
     background: #ececec;
+    @media (max-width: 425px) {
+        font-size: 15px;
+    }
+    @media (max-width: 375px) {
+        font-size: 12px;
+    }
 
     div {
         width: 80px;
@@ -67,6 +73,9 @@ const MakerLoading = () => {
     const soups = useSelector(({ maker }) => 
         maker.soups,
     );
+    const lockType = useSelector(({ maker }) => 
+        maker.lock,
+    );
     const percentObject = useSelector(({ setting }) => 
         setting.percentObject
     );
@@ -108,50 +117,57 @@ const MakerLoading = () => {
     }
 
     useEffect(() => {
-        console.log("API 부름!")
-        dispatch(priceList100(todayResult()));
-        dispatch(priceList200(todayResult()));
-        dispatch(priceList300(todayResult()));
-        dispatch(priceList400(todayResult()));
-        dispatch(priceList500(todayResult()));
-        dispatch(priceList600(todayResult()));
-    },[])
+        if (lockType === false) {
+            dispatch(priceList100(todayResult()));
+            dispatch(priceList200(todayResult()));
+            dispatch(priceList300(todayResult()));
+            dispatch(priceList400(todayResult()));
+            dispatch(priceList500(todayResult()));
+            dispatch(priceList600(todayResult()));
+        }
+    },[dispatch])
 
     const changecheck = (check) => {
-        setCheck(false);
-        console.log(check)
+        dispatch(lock(false));
         if (check === "refresh") {
-            dispatch(makerRice({number, outList, allOutList, percentObject}))
-            dispatch(makerMain({number, outList, allOutList, percentObject}))
-            dispatch(makerSide({number, outList, allOutList, percentObject}))
-            dispatch(makerSoup({number, outList, allOutList, percentObject}))
-        }
-    };
-
-    useEffect(() => {
-        if (data100&&data200&&data300&&data400&&data500&&data600) {
-            console.log("리스트 로딩 끝!");
-            console.log("메뉴 생성 시작");
+            setCheck(false);
+            dispatch(initial());
             dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
             dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
             dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
             dispatch(makerSoup({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
         }
-    },[number, dispatch, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600])
+    };
 
     useEffect(() => {
-        if (rices&&mains&&sides&&soups) {
-            setTimeout(()=>{
-                setCheck(true);
-                console.log("로딩 끝!")
-            },500);
+        if (lockType === false) {
+            if (data100&&data200&&data300&&data400&&data500&&data600) {
+                dispatch(makerRice({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+                dispatch(makerMain({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+                dispatch(makerSide({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+                dispatch(makerSoup({number, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600}))
+            }
         }
-    },[rices, mains, sides, soups])
+    },[number, dispatch, outList, allOutList, percentObject, data100, data200, data300, data400, data500, data600, lockType])
+
+    useEffect(() => {
+        if (lockType === false) {
+            if (rices&&mains&&sides&&soups) {
+                setCheck(true);
+            };
+        } else if (lockType === true) {
+            setCheck(true);
+        };
+    },[rices, mains, sides, soups, lockType])
+
 
     return (
         <>
             {check ? (
-                <MakerContainer changecheck={changecheck}></MakerContainer>
+                <MakerContainer
+                    changecheck={changecheck}
+                    setCheck={setCheck}>
+                </MakerContainer>
             ) : (
                 <MakerWait>
                     <h1>메뉴를 만들고 있습니다!</h1>

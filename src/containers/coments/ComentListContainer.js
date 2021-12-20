@@ -9,6 +9,10 @@ const ComentListContainerBlock = styled.div`
     width: 600px;
     height: 550px;
     overflow: auto;
+
+    @media (max-width: 425px) {
+        width: 100%;
+    }
 `;
 
 const DeleteCheckBox = styled.div`

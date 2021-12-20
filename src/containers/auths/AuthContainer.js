@@ -81,7 +81,6 @@ const AuthContainer = ({ history }) => {
     };
 
     const submitClick = (e, type) => {
-        console.log(type)
         if (e.target.className === "register" || type === "register") {
             if (password === password_check) {
                 dispatch(register({ username, password, password_check }));

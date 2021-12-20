@@ -5,7 +5,10 @@ const ComentBlock = styled.div`
     display: flex;
     width: 600px;
     height: 100px;
-    outline: 1px solid;
+
+    @media (max-width: 425px) {
+        width: 95%;
+    }
 
     .body {
         width: 500px;
@@ -23,6 +26,7 @@ const ComentBlock = styled.div`
     }
 
     button {
+        //border: 0;
         width: 100px;
     };
 `;

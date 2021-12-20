@@ -5,6 +5,7 @@ import Setting from '../../components/Setting'
 import { withRouter } from 'react-router-dom';
 import { settingListFind, repeatSetting, mainOut, allOut,
     mainKeep, mainKeep2, percentObjectSave, costSave } from '../../modules/setting';
+import { initial } from '../../modules/maker';
 
 const SettingContainerBlock = styled.div`
     width: 100vw;
@@ -16,9 +17,14 @@ const MakerWait = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     height: 100vh;
     background: #ececec;
+    @media (max-width: 425px) {
+        font-size: 12px;
+    }
+    @media (max-width: 375px) {
+        font-size: 10px;
+    }
 
     div {
         width: 80px;
@@ -42,7 +48,7 @@ const MakerWait = styled.div`
     }
 `;
 
-const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange,
+const SettingContainer = ({ history, settingCtrlClose, buttonChange, setCheck,
         setButtonChange, setSIn }) => {
     const dispatch = useDispatch()
 
@@ -87,7 +93,6 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
     useEffect(() => {
         if (!list) {
             dispatch(settingListFind());
-            // console.log("디스패치 실행")
         } else if (list) {
             if (mainList === null) {
                 setMainList(list);
@@ -124,7 +129,7 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
     const outRemove = (selectItam, e) => {
         if (e.target.className === "out") {
             setOutList(outList.filter(item => item !== selectItam));
-            setMainList([...mainList, selectItam]);
+            setMainList([...mainList, { _id: selectItam}]);
             setAble('');
         } else if (e.target.className === "subOut") {
             setAllOutList(allOutList.filter(item => item !== selectItam));
@@ -206,14 +211,16 @@ const SettingContainer = ({ history, changecheck, settingCtrlClose, buttonChange
     };
 
     const numU_1 = () => {
-        changecheck();
         setButtonChange(false);
+        setSIn(false);
+        dispatch(initial());
         dispatch(repeatSetting(num));
         dispatch(mainOut(outList));
         dispatch(allOut(allOutList));
         dispatch(mainKeep(mainList));
         dispatch(mainKeep2(allMainList));
         dispatch(percentObjectSave(percent))
+        setCheck(false);
     };
     const numU_2 = () => {
         dispatch(repeatSetting(num));

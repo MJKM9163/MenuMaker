@@ -33,6 +33,9 @@ const MenuBarBlock = styled.div`
     @media (max-width: 800px) {
         width: 300px;
     }
+    @media (max-width: 425px) {
+        width: 100vh;
+    }
 
     .logo {
         font-size: 22px;
@@ -49,6 +52,8 @@ const MenuBarBlock = styled.div`
             align-items: center;
             justify-content: center;
             font-size: 35px;
+            outline: 1px solid #2e2e2eaa;
+            border: 0;
             @media (max-width: 1280px) {
                 height: 80px;
                 font-size: 30px;
@@ -58,6 +63,10 @@ const MenuBarBlock = styled.div`
                 font-size: 30px;
             }
             @media (max-width: 800px) {
+                height: 90px;
+                font-size: 24px;
+            }
+            @media (max-width: 425px) {
                 height: 90px;
                 font-size: 24px;
             }
@@ -105,6 +114,9 @@ const Links = styled(Link)`
         font-size: 28px;
         height: 90px;
     }
+    @media (max-width: 425px) {
+        font-size: 25px;
+    }
 
     :hover {
         background: #fffbb0;
@@ -120,7 +132,6 @@ const MenuBar = () => {
     const { setUser } = useSelector(({ auth }) => ({
         setUser: auth.setUser,
     }));
-    console.log(setUser)
 
     const percentObject = useSelector(({ setting }) => 
         setting.percentObject
@@ -183,7 +194,7 @@ const MenuBar = () => {
                 </div>
                 <Address />
             </MenuBarBlock>
-            <PatchNote />
+            {/* <PatchNote /> */}
         </BackDiv>
     );
 };

@@ -16,18 +16,12 @@ const ItemBlock = styled.div`
     align-items: center;
     text-align: center;
     @media (max-width: 1024px) {
-        font-size: 16px;
-    }
-    @media (max-width: 800px) {
         font-size: 14px;
     }
 
     .tiemName {
         font-size: 20px;
         @media (max-width: 1024px) {
-            font-size: 18px;
-        }
-        @media (max-width: 800px) {
             font-size: 16px;
         }
         :hover {
@@ -87,7 +81,7 @@ const OverDiv = styled.div`
 
 const DescriptionDiv = styled.div`
     color: black;
-    background-color: #ff6e6e;
+    background-color: #ff9d9d;
 `
 
 const PriceDiv = styled.div`

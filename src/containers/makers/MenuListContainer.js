@@ -6,7 +6,16 @@ const MenuListContainerBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width: 425px) {
+        position: static;
+    }
     
+    .graphButton {
+        @media (max-width: 425px) {
+            width: 100px;
+            height: 30px;
+        }
+    }
 `;
 
 const ListContainer = styled.div`
@@ -19,9 +28,9 @@ const ListContainer = styled.div`
     height: ${props => props.charthide ? '620px' : '290px'};
     overflow-Y: ${props => props.charthide ? 'hidden' : 'scroll'};
     overflow-X: hidden;
-    outline: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    outline: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
     transition: 0.5s;
 
     @media (max-width: 1280px) {
@@ -36,11 +45,15 @@ const ListContainer = styled.div`
         width: 150px;
         height: ${props => props.charthide ? '450px' : '180px'};
     }
+    @media (max-width: 425px) {
+        width: 100vw;
+        height: ${props => props.charthide ? '460px' : '220px'};
+    }
 
     :hover {
-        outline: 1px solid red;
-        border-top: 1px solid red;
-        border-bottom: 1px solid red;
+        outline: 1px solid black;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
     }
 `;
 
@@ -75,7 +88,7 @@ const Chart = styled.div`
 `;
 
 const MenuListContainer = ({ rices, mains, sides, soups,
-    ricesPrice, mainsPrice, sidesPrice, soupsPrice }) => {
+    ricesPrice, mainsPrice, sidesPrice, soupsPrice, number }) => {
 
     const [graphData, setGraphData] = useState([]);
     const [charthide, setCharthide] = useState(true);
@@ -145,8 +158,9 @@ const MenuListContainer = ({ rices, mains, sides, soups,
             setCharthide(true);
         }
     };
+
     return (
-        <MenuListContainerBlock>
+        <MenuListContainerBlock>{number+1}
             <ListContainer charthide={charthide}>
                 {Repetition.map(repeat => (
                     <Maker
@@ -165,7 +179,11 @@ const MenuListContainer = ({ rices, mains, sides, soups,
                     />
                 ))}
             </ListContainer>
-            <button className='graphButton' onClick={graphStart}>{charthide ? ('그래프 열기'):('그래프 닫기')}</button>
+            <button
+                className='graphButton'
+                onClick={graphStart}>
+                    {charthide ? ('그래프 열기'):('그래프 닫기')}
+            </button>	
             {charthide ?
             (null)
             :

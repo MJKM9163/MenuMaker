@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MenuListContainer from './MenuListContainer';
 import SettingContainer from '../setting/SettingContainer';
+import { lock } from '../../modules/maker';
 import { withRouter } from 'react-router-dom';
 
 const MakerContainerBlock = styled.div`
@@ -11,12 +12,12 @@ const MakerContainerBlock = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    overflow-y: hidden;
+    overflow-Y: hidden;
 
     .top_text {
         font-size: 23px;
         cursor: default;
-    }
+    };
 `;
 
 const MenuListBlock = styled.div`
@@ -24,6 +25,10 @@ const MenuListBlock = styled.div`
     width: 100%;
     height: 650px;
     justify-content: space-around;
+    @media (max-width: 425px) {
+        overflow-Y: scroll;
+        justify-content: flex-start;
+    }
 `;
 
 const ButtonsBlock = styled.div`
@@ -55,8 +60,8 @@ const SlideSetting = styled.div`
 `;
 
 
-const MakerContainer = ({ changecheck, history }) => {
-
+const MakerContainer = ({ changecheck, history, setCheck }) => {
+    const dispatch = useDispatch();
     const { rices, mains, sides, soups } = useSelector(({ maker }) => ({
         rices: maker.rices,
         mains: maker.mains,
@@ -80,6 +85,7 @@ const MakerContainer = ({ changecheck, history }) => {
     };
 
     const backButton = () => {
+        dispatch(lock(true));
         history.push('/');
     };
 
@@ -87,8 +93,11 @@ const MakerContainer = ({ changecheck, history }) => {
         <>
             {SIn ? (
                 <SlideSetting>
-                    <SettingContainer changecheck={changecheck} buttonChange={buttonChange}
-                        setButtonChange={setButtonChange} setSIn={setSIn}/>
+                    <SettingContainer
+                        buttonChange={buttonChange}
+                        setButtonChange={setButtonChange}
+                        setSIn={setSIn}
+                        setCheck={setCheck}/>
                 </SlideSetting>
             ):(
                 null
@@ -109,7 +118,8 @@ const MakerContainer = ({ changecheck, history }) => {
                             ricesPrice={rices.price[dayNumber]}
                             mainsPrice={mains.price[dayNumber]}
                             sidesPrice={sides.price[dayNumber]}
-                            soupsPrice={soups.price[dayNumber]} />
+                            soupsPrice={soups.price[dayNumber]}
+                            number={dayNumber} />
                     ))}
                 </MenuListBlock>
                 <ButtonsBlock>
