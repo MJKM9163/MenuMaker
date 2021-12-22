@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -69,6 +69,7 @@ const ComentContainer = ({ history }) => {
     const [itemFocus, setItemFocus] = useState(false);
     const [deleteBox, setDeleteBox] = useState(false);
     const [pageListNum, setPageListNum] = useState(0);
+    const createRef = useRef();
 
     const body = useSelector(({ coment }) => 
         coment.body,
@@ -112,12 +113,10 @@ const ComentContainer = ({ history }) => {
         if (type === "createButton") {
             dispatch(comentCreate({ body, username }));
             dispatch(initialization());
-            setLoading(false);
             setListRender(true);
         } else if (type === "updateButton") {
             dispatch(comentUpdate({ body, idValue }));
             dispatch(initialization());
-            setLoading(false);
             setListRender(true);
             setChangeInput(false);
             setChangeButton(false);
@@ -139,7 +138,6 @@ const ComentContainer = ({ history }) => {
         try {
             setDeleteBox(false);
             await comentDelete(idValue);
-            setLoading(false);
             setListRender(true);
         } catch (e) {
             console.log(e);
@@ -148,14 +146,22 @@ const ComentContainer = ({ history }) => {
 
     const updateClick = (e) => {
         if (!changeButton) {
+            const test = listDate.filter(item => {
+                if (item._id === e.target.id) {
+                    return true;
+                }
+                return false;
+            })
             setIdValue(e.target.id);
             dispatch(changeText({
                 form: "body",
-                value: "",
+                value: test[0].body
+                ,
             }));
             setChangeInput(true);
             setChangeButton(true);
             setItemFocus(e.target.id);
+            createRef.current.focus();
         } else if (changeButton) {
             setIdValue(null);
             dispatch(changeText({
@@ -225,7 +231,8 @@ const ComentContainer = ({ history }) => {
                 username={username}
                 body={body}
                 changeInput={changeInput}
-                changeButton={changeButton} />
+                changeButton={changeButton}
+                createRef={createRef} />
             <Address />
         </ComentBox>
     );
