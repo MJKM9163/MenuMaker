@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components'
+import Address from './common/Address';
 
 const SettingBlock = styled.div`
     display: flex;
@@ -430,11 +431,11 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                     <select onChange={changeNum} defaultValue={number}>
                         <option>1</option>
                         <option>2</option>
-                        <option>3</option>
+                        {/* <option>3</option>
                         <option>4</option>
                         <option>5</option>
                         <option>6</option>
-                        <option>7</option>
+                        <option>7</option> */}
                     </select>
                 </Inputs>
                 <ExSelectBox>
@@ -466,9 +467,7 @@ const Setting = ({ changeNum, SError, able, mainList, outList, buttonChange, mai
                 <button className="back" onClick={backButton}>닫기</button>
                 </Buttons>
             </InputBlock>
-            <div className="address">
-                rhkrrbaudgg@naver.com
-            </div>
+            <Address />
         </SettingBlock>
     );
 };

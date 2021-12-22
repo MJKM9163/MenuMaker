@@ -223,6 +223,7 @@ const SettingContainer = ({ history, settingCtrlClose, buttonChange, setCheck,
         setCheck(false);
     };
     const numU_2 = () => {
+        dispatch(initial())
         dispatch(repeatSetting(num));
         dispatch(mainOut(outList));
         dispatch(allOut(allOutList));
