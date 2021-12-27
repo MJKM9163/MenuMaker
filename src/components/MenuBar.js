@@ -156,10 +156,44 @@ const MenuBar = () => {
     // const dbOut = () => {
     //     setDb(false);
     // };
-
+    
     const alertBox = () => {
         alert('가격을 설정하지 않았습니다. 가격을 먼저 설정하세요.')
     }
+    // const test1 = ["leo", "kiki", "eden"]
+    // const test2 = ["marina", "josipa", "nikola", "vinko", "filipa"]
+    // const test3 = ["mislav", "stanko", "mislav", "ana"]
+    // const test11 = ["eden", "kiki"]
+    // const test22 = ["josipa", "filipa", "marina", "nikola"]
+    // const test33 = ["stanko", "ana", "mislav"]
+
+    // function solution(participant, completion) {
+    //     const obj = {}
+    //     let aa = 0;
+    //     aa += 1;
+    //     console.log(aa)
+    //     for (let p of participant) {
+
+    //         obj[p] = obj[p] ? obj[p] + 1 : 1;
+
+    //     }
+    //     for (let c of completion) {
+    //         console.log(c)
+    //         obj[c] -= 1;
+    //         console.log('c ==>',obj[c])
+    //         console.log(obj)
+    //     }
+    //     console.log(obj)
+    //     for (let key in obj) {
+    //         if (obj[key] == 1) {
+    //             return key;
+    //         }
+    //     }
+            
+    // }
+    // solution(test3,test33);
+
+
 
     return (
         <BackDiv>

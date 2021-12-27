@@ -9,6 +9,7 @@ const REGISTER_SUCCESS = 'login/REGISTER_SUCCESS';
 const LOGIN = 'login/LOGIN';
 const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
 const LOGOUT = 'login/LOGOUT';
+const FAILURE = 'login/FAILURE';
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
 
 export const valueChange = createAction(
@@ -22,6 +23,9 @@ export const login = createAction(
 );
 export const logout = createAction(
     LOGOUT,
+);
+export const initial = createAction(
+    FAILURE,
 );
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 
@@ -71,6 +75,7 @@ const auth = handleActions(
             setUser,
         }),
         [LOGOUT]: state => initialState,
+        [FAILURE]: state => initialState,
     },
     initialState,
 );

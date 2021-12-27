@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { register, login, valueChange } from '../../modules/auth';
+import { register, login, valueChange, initial } from '../../modules/auth';
 import Auth from '../../components/auths/Auth';
 
 const AuthContainerBlock = styled.div`
@@ -31,6 +31,7 @@ const AuthContainer = ({ history }) => {
     },[history, setUser]);
 
     useEffect(() => { //로그인 할 떄 딱 한번 실행 
+        console.log('tet')
         if (loginID) { // 실행 후 loginID 값 잃어버림
             try {
                 localStorage.setItem('user', JSON.stringify(loginID));
@@ -90,6 +91,7 @@ const AuthContainer = ({ history }) => {
             };
         } else if (e.target.className ==="login" || type === "login") {
             dispatch(login({ username, password }));
+            dispatch(initial());
         };
     };
 
